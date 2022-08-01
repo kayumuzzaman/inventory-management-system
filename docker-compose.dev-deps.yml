@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  mongo:
+    image: mongo:3.6
+    restart: unless-stopped
+    volumes:
+      - './data/mongo:/data/db'
+    ports:
+      - '27017:27017'
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
