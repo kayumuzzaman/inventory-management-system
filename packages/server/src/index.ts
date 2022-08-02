@@ -1,37 +1,20 @@
-#!/usr/bin/env node
-// require('dotenv').config({ path: __dirname + '/.env' })
-
-/**
- * Module dependencies.
- */
-
+import dotenv from 'dotenv'
+import path from 'path'
 import app from './app'
 import http from 'http'
 
-/**
- * Get port from environment and store in Express.
- */
+dotenv.config({
+  path: path.resolve(__dirname, '..', `${process.env.NODE_ENV}.env`)
+})
 
-var port = normalizePort(process.env.PORT || '3000')
+const port = normalizePort(process.env.PORT || '3000')
 app.set('port', port)
 
-/**
- * Create HTTP server.
- */
+const server = http.createServer(app)
 
-var server = http.createServer(app)
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port)
+server.listen(process.env.PORT)
 server.on('error', onError)
 server.on('listening', onListening)
-
-/**
- * Normalize a port into a number, string, or false.
- */
 
 function normalizePort(val: any) {
   var port = parseInt(val, 10)
@@ -48,10 +31,6 @@ function normalizePort(val: any) {
 
   return false
 }
-
-/**
- * Event listener for HTTP server "error" event.
- */
 
 function onError(error: any) {
   if (error.syscall !== 'listen') {
@@ -74,10 +53,6 @@ function onError(error: any) {
       throw error
   }
 }
-
-/**
- * Event listener for HTTP server "listening" event.
- */
 
 function onListening() {
   var addr = server.address()

@@ -1,12 +1,15 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-import indexRouter from './routes/index'
-import usersRouter from './routes/users'
+import usersRouter from './routes/product.routes'
 import connectMongo from './configs/db.configs'
 import dotenv from 'dotenv'
+import path from 'path'
 
-dotenv.config()
+dotenv.config({
+  path: path.resolve(__dirname, '..', `${process.env.NODE_ENV}.env`)
+})
+
 const app = express()
 
 app.use(logger('dev'))
@@ -14,13 +17,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use('/', indexRouter)
 app.use('/products', usersRouter)
-
-// catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//   next(createError(404))
-// })
 
 // error handler
 app.use(function (err: any, req: any, res: any, next: any) {
