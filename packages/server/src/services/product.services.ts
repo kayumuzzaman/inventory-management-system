@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
-import Products from '../models/product'
+import Products from '../models/product.model'
 
-export const getAllProductService: any = async (query: any) => {
+export const getAllProductService = async (query: any) => {
   if (query._id) {
     try {
       query._id = new mongoose.mongo.ObjectId(query._id)
@@ -11,13 +11,13 @@ export const getAllProductService: any = async (query: any) => {
   }
 
   try {
-    let items = await Products.find(query)
-    let total = await Products.count()
+    const products = await Products.find(query)
+    const total = await Products.count()
 
     return {
       error: false,
       statusCode: 200,
-      data: items,
+      data: products,
       total
     }
   } catch (errors) {
@@ -29,15 +29,39 @@ export const getAllProductService: any = async (query: any) => {
   }
 }
 
-export const insertProductService: any = async (data: any) => {
+export const getProductDetailsService = async (id: string) => {
   try {
-    console.log('dataaa', data)
-    let item = await Products.create(data)
-    if (item)
+    const product = await Products.findById(id)
+    if (product) {
       return {
         error: false,
-        item
+        product
       }
+    } else {
+      return {
+        error: true,
+        errorMessage: 'Product not found.'
+      }
+    }
+  } catch (errors: any) {
+    console.log('error on getting product details', errors)
+    return {
+      error: true,
+      statusCode: 404,
+      errors
+    }
+  }
+}
+
+export const insertProductService = async (data: any) => {
+  try {
+    const product = await Products.create(data)
+    if (product) {
+      return {
+        error: false,
+        product
+      }
+    }
   } catch (error: any) {
     console.log('error', error)
     return {
@@ -49,15 +73,16 @@ export const insertProductService: any = async (data: any) => {
   }
 }
 
-export const updateProductService: any = async (id: string, data: any) => {
+export const updateProductService = async (id: string, data: any) => {
   try {
-    let item = await Products.findByIdAndUpdate(id, data, { new: true })
+    const product = await Products.findByIdAndUpdate(id, data, { new: true })
     return {
       error: false,
       statusCode: 202,
-      item
+      product
     }
   } catch (errors) {
+    console.log('error', errors)
     return {
       error: true,
       statusCode: 500,
@@ -66,7 +91,7 @@ export const updateProductService: any = async (id: string, data: any) => {
   }
 }
 
-export const deleteProductService: any = async (id: string) => {
+export const deleteProductService = async (id: string) => {
   try {
     const item = await Products.findByIdAndDelete(id)
     console.log('delete', item)

@@ -19,6 +19,7 @@
   "scripts": {
     "prepare": "husky install",
     "dev": "lerna run build && concurrently \"lerna run --parallel dev\" \"yarn run compose:deps\"",
+    "prod": "lerna run build && concurrently \"lerna run --parallel prod\" \"yarn run compose:deps\"",
     "compose:deps": "docker-compose -p angular -f docker-compose.dev-deps.yml up",
     "compose:down:deps": "docker-compose -p angular -f docker-compose.dev-deps.yml down",
     "build": "lerna run build --stream --concurrency=1"

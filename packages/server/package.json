@@ -4,7 +4,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "export NODE_ENV=development && nodemon src/index.ts",
+    "prod": "export NODE_ENV=production && nodemon src/index.ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.{js,ts}\"",
     "lint:fix": "yarn run lint -- --fix"
