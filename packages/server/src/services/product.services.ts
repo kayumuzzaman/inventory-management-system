@@ -37,11 +37,10 @@ export const getProductDetailsService = async (id: string) => {
         error: false,
         product
       }
-    } else {
-      return {
-        error: true,
-        errorMessage: 'Product not found.'
-      }
+    }
+    return {
+      error: true,
+      errorMessage: 'Product not found.'
     }
   } catch (errors: any) {
     console.log('error on getting product details', errors)

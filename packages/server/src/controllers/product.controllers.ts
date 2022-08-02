@@ -16,19 +16,19 @@ export const getProductDetails: any = async (req: any, res: any) => {
 }
 
 export const insertProducts: any = async (req: any, res: any) => {
-  let response = await insertProductService(req.body)
+  const response = await insertProductService(req.body)
   if (response?.error) return res.status(response.statusCode).send(response)
   return res.status(201).send(response)
 }
 
 export const updateProducts: any = async (req: any, res: any) => {
   const { id } = req.params
-  let response = await updateProductService(id, req.body)
+  const response = await updateProductService(id, req.body)
   return res.status(response.statusCode).send(response)
 }
 
 export const deleteProducts: any = async (req: any, res: any) => {
   const { id } = req.params
-  let response = await deleteProductService(id)
+  const response = await deleteProductService(id)
   return res.status(response.statusCode).send(response)
 }
