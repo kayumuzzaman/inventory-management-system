@@ -46,17 +46,10 @@ export const getProductDetailsService = async (id: string) => {
 export const insertProductService = async (data: any) => {
   try {
     const product = await Products.create(data)
-    if (product) {
-      return {
-        error: false,
-        statusCode: 201,
-        data: product
-      }
-    }
     return {
-      error: true,
-      statusCode: 500,
-      message: 'Not able to create item'
+      error: false,
+      statusCode: 201,
+      data: product
     }
   } catch (errors: any) {
     return {

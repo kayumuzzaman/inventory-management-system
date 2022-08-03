@@ -9,10 +9,10 @@ import {
 
 const router = express.Router()
 
-router.get('/list', getAllItems)
-router.get('/details/:id', getItemDetails)
+router.get('/', getAllItems)
+router.get('/:id', getItemDetails)
 router.post('/add', insertItems)
-router.put('/update/:id', updateItems)
-router.delete('/delete/:id', deleteItems)
+router.put('/:id', updateItems)
+router.delete('/:id', deleteItems)
 
 export default router
