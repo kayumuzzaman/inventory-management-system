@@ -25,18 +25,18 @@ export const getItemStatusService = async (id: string) => {
   try {
     const item = await ItemStatus.findById(id)
 
-    if (!item) {
+    if (item) {
       return {
-        error: true,
-        statusCode: 404,
-        errorMessage: 'Item not found'
+        error: false,
+        statusCode: 200,
+        data: item
       }
     }
 
     return {
-      error: false,
-      statusCode: 200,
-      data: item
+      error: true,
+      statusCode: 409,
+      errorMessage: 'Item not found'
     }
   } catch (errors) {
     return {
@@ -52,16 +52,20 @@ export const insertItemStatusService = async (data: any) => {
   try {
     const checkItemIfExist = await ItemStatus.exists({ itemId: data.itemId })
 
-    if (checkItemIfExist) {
+    if (!checkItemIfExist) {
+      await ItemStatus.create(data)
       return {
-        error: true,
-        errorMessage: 'Item already exist',
-        existItemId: data.itemId
+        error: false,
+        statusCode: 200
       }
     }
-    const itemAdded = await ItemStatus.create(data)
+    return {
+      error: true,
+      errorMessage: 'Item already exist',
+      statusCode: 400,
+      existItemId: data.itemId
+    }
   } catch (error: any) {
-    console.log('error', error)
     return {
       error: true,
       statusCode: 500,
@@ -84,9 +88,9 @@ export const updateItemStatusService = async (id: string, data: any) => {
         returnedDate: oldItem.returnedDate,
         description: oldItem.description
       }
-      const historyItem = await ItemStatusHistory.create(item)
+      await ItemStatusHistory.create(item)
     }
-    const deleteOldItem = await ItemStatus.findByIdAndDelete(id)
+    await ItemStatus.findByIdAndDelete(id)
     const newItem = await ItemStatus.create(data)
 
     return {
@@ -96,7 +100,6 @@ export const updateItemStatusService = async (id: string, data: any) => {
       newItem
     }
   } catch (errors) {
-    console.log('error', errors)
     return {
       error: true,
       statusCode: 500,
@@ -109,7 +112,6 @@ export const deleteItemStatusService = async (id: string) => {
   // TODO: make the item status available in items collection
   try {
     const item = await ItemStatus.findByIdAndDelete(id)
-    console.log('delete', item)
     if (!item)
       return {
         error: true,

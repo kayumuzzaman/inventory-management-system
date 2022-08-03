@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const ObjectId = mongoose.Schema.Types.ObjectId
+const { ObjectId } = mongoose.Schema.Types
 const itemStatusHistorySchema = new mongoose.Schema(
   {
     itemId: ObjectId,

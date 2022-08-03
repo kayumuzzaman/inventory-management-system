@@ -1,10 +1,11 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-import usersRouter from './routes/product.routes'
+import productRouter from './routes/product.route'
+import itemRouter from './routes/item.route'
+import connectMongo from './configs/db.config'
 import itemStatusRouter from './routes/item-status.route'
 import itemStatusHistoryRouter from './routes/item-status-history.route'
-import connectMongo from './configs/db.configs'
 import dotenv from 'dotenv'
 import path from 'path'
 
@@ -19,7 +20,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use('/products', usersRouter)
+app.use('/product', productRouter)
+app.use('/item', itemRouter)
 app.use('/item-status', itemStatusRouter)
 app.use('/item-status-history', itemStatusHistoryRouter)
 
