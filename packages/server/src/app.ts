@@ -1,8 +1,8 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-import usersRouter from './routes/product.routes'
-import connectMongo from './configs/db.configs'
+import usersRouter from './routes/product.route'
+import connectMongo from './configs/db.config'
 import dotenv from 'dotenv'
 import path from 'path'
 
