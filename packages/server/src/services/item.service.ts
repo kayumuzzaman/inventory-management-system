@@ -1,13 +1,13 @@
-import Products from '../models/product.model'
+import Items from '../models/item.model'
 
-export const getAllProductService = async () => {
+export const getAllItemservice = async () => {
   try {
-    const product = await Products.find()
-    const total = await Products.count()
+    const item = await Items.find()
+    const total = await Items.count()
     return {
       error: false,
       statusCode: 200,
-      data: product,
+      data: item,
       total
     }
   } catch (errors) {
@@ -19,20 +19,20 @@ export const getAllProductService = async () => {
   }
 }
 
-export const getProductDetailsService = async (id: string) => {
+export const getItemDetailsService = async (id: string) => {
   try {
-    const product = await Products.findById(id)
-    if (product) {
+    const item = await Items.findById(id)
+    if (item) {
       return {
         error: false,
-        statusCode: 200,
-        data: product
+        statusCode: 201,
+        data: item
       }
     }
     return {
       error: false,
       statusCode: 404,
-      message: 'Product not available'
+      message: 'item not available'
     }
   } catch (errors) {
     return {
@@ -43,14 +43,14 @@ export const getProductDetailsService = async (id: string) => {
   }
 }
 
-export const insertProductService = async (data: any) => {
+export const insertItemservice = async (data: any) => {
   try {
-    const product = await Products.create(data)
-    if (product) {
+    const item = await Items.create(data)
+    if (item) {
       return {
         error: false,
         statusCode: 201,
-        data: product
+        data: item
       }
     }
     return {
@@ -68,20 +68,20 @@ export const insertProductService = async (data: any) => {
   }
 }
 
-export const updateProductService = async (id: string, data: any) => {
+export const updateItemservice = async (id: string, data: any) => {
   try {
-    const product = await Products.findByIdAndUpdate(id, data, { new: true })
-    if (product) {
+    const item = await Items.findByIdAndUpdate(id, data, { new: true })
+    if (item) {
       return {
         error: false,
         statusCode: 202,
-        data: product
+        data: item
       }
     }
     return {
       error: true,
       statusCode: 404,
-      message: 'product not found'
+      message: 'item not found'
     }
   } catch (errors) {
     return {
@@ -92,22 +92,22 @@ export const updateProductService = async (id: string, data: any) => {
   }
 }
 
-export const deleteProductService = async (id: string) => {
+export const deleteItemservice = async (id: string) => {
   try {
-    const product = await Products.findByIdAndDelete(id)
+    const item = await Items.findByIdAndDelete(id)
 
-    if (product) {
+    if (item) {
       return {
         error: false,
         deleted: true,
         statusCode: 202,
-        data: product
+        data: item
       }
     }
     return {
       error: true,
       statusCode: 404,
-      message: 'product not found'
+      message: 'item not found'
     }
   } catch (errors) {
     return {

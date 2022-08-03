@@ -1,7 +1,8 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-import usersRouter from './routes/product.route'
+import productRouter from './routes/product.route'
+import itemRouter from './routes/item.route'
 import connectMongo from './configs/db.config'
 import dotenv from 'dotenv'
 import path from 'path'
@@ -17,7 +18,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use('/products', usersRouter)
+app.use('/product', productRouter)
+app.use('/item', itemRouter)
 
 // error handler
 app.use(function (err: any, req: any, res: any, next: any) {

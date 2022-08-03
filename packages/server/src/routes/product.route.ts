@@ -11,7 +11,7 @@ const router = express.Router()
 
 router.get('/list', getAllProducts)
 router.get('/details/:id', getProductDetails)
-router.post('/add-product', insertProducts)
+router.post('/add', insertProducts)
 router.put('/update/:id', updateProducts)
 router.delete('/delete/:id', deleteProducts)
 
