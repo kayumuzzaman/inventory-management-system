@@ -2,6 +2,8 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import usersRouter from './routes/product.routes'
+import itemStatusRouter from './routes/item-status.route'
+import itemStatusHistoryRouter from './routes/item-status-history.route'
 import connectMongo from './configs/db.configs'
 import dotenv from 'dotenv'
 import path from 'path'
@@ -18,6 +20,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.use('/products', usersRouter)
+app.use('/item-status', itemStatusRouter)
+app.use('/item-status-history', itemStatusHistoryRouter)
 
 // error handler
 app.use(function (err: any, req: any, res: any, next: any) {
