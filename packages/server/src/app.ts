@@ -8,6 +8,7 @@ import itemStatusRouter from './routes/item-status.route'
 import itemStatusHistoryRouter from './routes/item-status-history.route'
 import dotenv from 'dotenv'
 import path from 'path'
+import cors from 'cors'
 
 dotenv.config({
   path: path.resolve(__dirname, '..', `${process.env.NODE_ENV}.env`)
@@ -19,6 +20,7 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(cors())
 
 app.use('/product', productRouter)
 app.use('/item', itemRouter)
