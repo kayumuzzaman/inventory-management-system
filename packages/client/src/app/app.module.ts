@@ -12,6 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination'
 import { HttpClientModule } from '@angular/common/http'
 import { ItemHistoryListComponent } from './item-history-list/item-history-list.component'
 import { ItemHistoryComponent } from './item-history-list/item-history/item-history.component'
+import { DetailsTableComponent } from './component/table/details-table.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ItemHistoryComponent } from './item-history-list/item-history/item-hist
     ProductItemComponent,
     ProductDetailsComponent,
     ItemHistoryListComponent,
-    ItemHistoryComponent
+    ItemHistoryComponent,
+    DetailsTableComponent
   ],
   imports: [
     BrowserModule,
