@@ -34,7 +34,8 @@ module.exports = {
         '@angular-eslint/component-selector': [
           'error',
           { type: 'element', prefix: 'app', style: 'kebab-case' }
-        ]
+        ],
+        '@angular-eslint/no-empty-lifecycle-method': 'off'
       }
     },
     {
