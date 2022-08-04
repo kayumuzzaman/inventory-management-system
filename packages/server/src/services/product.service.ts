@@ -1,23 +1,13 @@
-import mongoose from 'mongoose'
 import Products from '../models/product.model'
 
-export const getAllProductService = async (query: any) => {
-  if (query._id) {
-    try {
-      query._id = new mongoose.mongo.ObjectId(query._id)
-    } catch (error) {
-      console.log('not able to generate mongoose id with content', query._id)
-    }
-  }
-
+export const getAllProductService = async () => {
   try {
-    const products = await Products.find(query)
+    const product = await Products.find()
     const total = await Products.count()
-
     return {
       error: false,
       statusCode: 200,
-      data: products,
+      data: product,
       total
     }
   } catch (errors) {
@@ -35,19 +25,19 @@ export const getProductDetailsService = async (id: string) => {
     if (product) {
       return {
         error: false,
-        product
-      }
-    } else {
-      return {
-        error: true,
-        errorMessage: 'Product not found.'
+        statusCode: 200,
+        data: product
       }
     }
-  } catch (errors: any) {
-    console.log('error on getting product details', errors)
+    return {
+      error: false,
+      statusCode: 404,
+      message: 'Product not available'
+    }
+  } catch (errors) {
     return {
       error: true,
-      statusCode: 404,
+      statusCode: 500,
       errors
     }
   }
@@ -56,19 +46,17 @@ export const getProductDetailsService = async (id: string) => {
 export const insertProductService = async (data: any) => {
   try {
     const product = await Products.create(data)
-    if (product) {
-      return {
-        error: false,
-        product
-      }
+    return {
+      error: false,
+      statusCode: 201,
+      data: product
     }
-  } catch (error: any) {
-    console.log('error', error)
+  } catch (errors: any) {
     return {
       error: true,
       statusCode: 500,
-      message: error?.errmsg || 'Not able to create item',
-      errors: error?.errors
+      message: 'Not able to create item',
+      errors
     }
   }
 }
@@ -76,13 +64,19 @@ export const insertProductService = async (data: any) => {
 export const updateProductService = async (id: string, data: any) => {
   try {
     const product = await Products.findByIdAndUpdate(id, data, { new: true })
+    if (product) {
+      return {
+        error: false,
+        statusCode: 202,
+        data: product
+      }
+    }
     return {
-      error: false,
-      statusCode: 202,
-      product
+      error: true,
+      statusCode: 404,
+      message: 'product not found'
     }
   } catch (errors) {
-    console.log('error', errors)
     return {
       error: true,
       statusCode: 500,
@@ -93,20 +87,20 @@ export const updateProductService = async (id: string, data: any) => {
 
 export const deleteProductService = async (id: string) => {
   try {
-    const item = await Products.findByIdAndDelete(id)
-    console.log('delete', item)
-    if (!item)
-      return {
-        error: true,
-        statusCode: 404,
-        message: 'item not found'
-      }
+    const product = await Products.findByIdAndDelete(id)
 
+    if (product) {
+      return {
+        error: false,
+        deleted: true,
+        statusCode: 202,
+        data: product
+      }
+    }
     return {
-      error: false,
-      deleted: true,
-      statusCode: 202,
-      item
+      error: true,
+      statusCode: 404,
+      message: 'product not found'
     }
   } catch (errors) {
     return {

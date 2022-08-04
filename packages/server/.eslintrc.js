@@ -33,9 +33,6 @@ module.exports = {
     'no-console': 0,
     'no-restricted-globals': 0,
     'no-use-before-define': 0,
-    'arrow-body-style': 0,
-    'no-var': 0,
-    'no-shadow': 0,
-    'prefer-const': 0
+    'arrow-body-style': 0
   }
 }
