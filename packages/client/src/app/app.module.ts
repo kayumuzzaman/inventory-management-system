@@ -8,6 +8,7 @@ import { ProductsComponent } from './products/products.component'
 import { ProductListComponent } from './products/product-list/product-list.component'
 import { ProductItemComponent } from './products/product-list/product-item/product-item.component'
 import { ProductDetailsComponent } from './products/product-details/product-details.component'
+import { DetailsTableComponent } from './component/table/details-table.component'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
     ProductsComponent,
     ProductListComponent,
     ProductItemComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    DetailsTableComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

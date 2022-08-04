@@ -2,7 +2,8 @@
 
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Product } from '../product.model'
+import { Row } from 'src/app/component/table/details-table.component'
+import { environment } from 'src/environments/environment'
 import { ProductService } from '../product.service'
 
 @Component({
@@ -11,8 +12,11 @@ import { ProductService } from '../product.service'
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  details: Product
+  title: string = 'Product Details'
+  rows: Row[] = []
   productId: string | null
+  URL: string = `${environment.baseURL}/products`
+
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute
@@ -24,9 +28,29 @@ export class ProductDetailsComponent implements OnInit {
       this.productService
         .getProductDetails(this.productId)
         .subscribe((response) => {
-          this.details = response.data
-          console.log(response)
-          return this.details
+          this.rows = [
+            {
+              key: 'Product name',
+              value: response.data.productName
+            },
+            {
+              key: 'Type',
+              value: response.data.type
+            },
+            {
+              key: 'Model',
+              value: response.data.model
+            },
+            {
+              key: 'Quantity',
+              value: response.data.quantity
+            },
+            {
+              key: 'Available',
+              value: response.data.inStock
+            }
+          ]
+          return this.rows
         })
     }
   }
