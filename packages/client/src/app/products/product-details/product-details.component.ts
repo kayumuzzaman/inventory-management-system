@@ -19,15 +19,20 @@ interface Details {
 export class ProductDetailsComponent implements OnInit {
   details: Details
   productId: string | null
-  constructor(private service: ProductService, private route: ActivatedRoute) {}
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id')
     if (this.productId) {
-      this.service.getProductDetails(this.productId).subscribe((response) => {
-        this.details = response
-        console.log(response)
-      })
+      this.productService
+        .getProductDetails(this.productId)
+        .subscribe((response) => {
+          this.details = response
+          console.log(response)
+        })
     }
   }
 }
