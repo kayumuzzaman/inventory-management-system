@@ -2,7 +2,8 @@ module.exports = {
   root: true,
   env: {
     node: true,
-    es6: true
+    es6: true,
+    jasmine: true
   },
   parserOptions: {
     project: 'tsconfig.json',
@@ -24,7 +25,8 @@ module.exports = {
       },
       extends: [
         'plugin:@angular-eslint/recommended',
-        'plugin:@angular-eslint/template/process-inline-templates'
+        'plugin:@angular-eslint/template/process-inline-templates',
+        'plugin:prettier/recommended'
       ],
       rules: {
         '@angular-eslint/directive-selector': [
@@ -34,7 +36,8 @@ module.exports = {
         '@angular-eslint/component-selector': [
           'error',
           { type: 'element', prefix: 'app', style: 'kebab-case' }
-        ]
+        ],
+        '@angular-eslint/no-empty-lifecycle-method': 'off'
       }
     },
     {
