@@ -14,12 +14,19 @@
                             <th class="py-3 px-6 text-center">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="text-gray-600 text-sm font-light" *ngFor="let product of products; let i = index">
+                    <tbody class="text-gray-600 text-sm font-light" *ngFor="let product of products 
+                    | paginate: {itemsPerPage: tableSize, currentPage: page, totalItems: count}; let i=index">
                         <tr class="border-b border-gray-200 hover:bg-gray-100" app-product-item [product]="product"
                             [index]="i"></tr>
                     </tbody>
                 </table>
             </div>
+            <ng-container>
+                <div class="flex justify-center">
+                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event">
+                    </pagination-controls>
+                </div>
+            </ng-container>
         </div>
     </div>
 </div>
