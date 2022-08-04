@@ -4,7 +4,7 @@ import { Product } from '../../product.model'
 /* eslint-disable */
 
 @Component({
-  selector: 'app-product-item',
+  selector: '[app-product-item]',
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.css']
 })

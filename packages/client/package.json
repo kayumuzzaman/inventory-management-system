@@ -7,7 +7,7 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"{src,app}/**/*.ts\" --fix",
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve",
     "dev": "ng serve --watch",
     "prod": "ng serve --watch",
     "build": "ng build",
