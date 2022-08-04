@@ -15,7 +15,7 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
     HeaderComponent,
     ProductsComponent,
     ProductListComponent,
-    ProductItemComponent
+    ProductItemComponent,
     ProductDetailsComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
