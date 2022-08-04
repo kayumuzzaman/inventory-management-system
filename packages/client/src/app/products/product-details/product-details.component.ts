@@ -2,14 +2,8 @@
 
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { Product } from '../product.model'
 import { ProductService } from '../product.service'
-
-interface Details {
-  productName: string
-  inStock: number
-  quantity: number
-  type: string
-}
 
 @Component({
   selector: 'app-product-details',
@@ -17,7 +11,7 @@ interface Details {
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  details: Details
+  details: Product
   productId: string | null
   constructor(
     private productService: ProductService,
@@ -30,8 +24,9 @@ export class ProductDetailsComponent implements OnInit {
       this.productService
         .getProductDetails(this.productId)
         .subscribe((response) => {
-          this.details = response
+          this.details = response.data
           console.log(response)
+          return this.details
         })
     }
   }
