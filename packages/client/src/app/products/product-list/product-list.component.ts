@@ -10,11 +10,14 @@ import { ProductService } from '../product.service'
 })
 export class ProductListComponent implements OnInit {
   products!: Product[]
+  page: number = 1
+  count: number = 0
+  tableSize: number = 10
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productService.getALlProducts().subscribe((response) => {
+    this.productService.getAllProducts().subscribe((response) => {
       this.products = response?.data
     })
   }

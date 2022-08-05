@@ -8,7 +8,7 @@ import { fromFetch } from 'rxjs/fetch'
 export class ProductService {
   constructor() {}
 
-  getALlProducts() {
+  getAllProducts() {
     return fromFetch(`http://localhost:3000/product/`).pipe(
       switchMap((response) => {
         if (response.ok) {

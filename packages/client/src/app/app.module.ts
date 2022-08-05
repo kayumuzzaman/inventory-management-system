@@ -8,6 +8,10 @@ import { ProductsComponent } from './products/products.component'
 import { ProductListComponent } from './products/product-list/product-list.component'
 import { ProductItemComponent } from './products/product-list/product-item/product-item.component'
 import { ProductDetailsComponent } from './products/product-details/product-details.component'
+import { NgxPaginationModule } from 'ngx-pagination'
+import { HttpClientModule } from '@angular/common/http'
+import { ItemHistoryListComponent } from './item-history-list/item-history-list.component'
+import { ItemHistoryComponent } from './item-history-list/item-history/item-history.component'
 import { DetailsTableComponent } from './component/table/details-table.component'
 
 @NgModule({
@@ -18,9 +22,16 @@ import { DetailsTableComponent } from './component/table/details-table.component
     ProductListComponent,
     ProductItemComponent,
     ProductDetailsComponent,
+    ItemHistoryListComponent,
+    ItemHistoryComponent,
     DetailsTableComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgxPaginationModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
