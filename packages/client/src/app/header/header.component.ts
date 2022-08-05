@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 
-/* eslint-disable */
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

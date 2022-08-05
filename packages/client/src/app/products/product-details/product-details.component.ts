@@ -1,8 +1,6 @@
-/* eslint-disable*/
-
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Row } from 'src/app/component/table/details-table.component'
+import { IRowDetails } from 'src/app/component/details-table/details-table.component'
 import { environment } from 'src/environments/environment'
 import { ProductService } from '../product.service'
 
@@ -13,7 +11,8 @@ import { ProductService } from '../product.service'
 })
 export class ProductDetailsComponent implements OnInit {
   title: string = 'Product Details'
-  rows: Row[] = []
+  sectionTitle: string = 'Item list of this product'
+  rows: IRowDetails[] = []
   productId: string | null
   URL: string = `${environment.baseURL}/products`
 

@@ -1,18 +1,18 @@
 /* eslint-disable no-undef */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { ProductListComponent } from './product-list.component'
+import { ListTableComponent } from './list-table.component'
 
-describe('ProductListComponent', () => {
-  let component: ProductListComponent
-  let fixture: ComponentFixture<ProductListComponent>
+describe('ListTableComponent', () => {
+  let component: ListTableComponent
+  let fixture: ComponentFixture<ListTableComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ProductListComponent]
+      declarations: [ListTableComponent]
     }).compileComponents()
 
-    fixture = TestBed.createComponent(ProductListComponent)
+    fixture = TestBed.createComponent(ListTableComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
