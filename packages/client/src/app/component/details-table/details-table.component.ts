@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 
-export interface Row {
+export interface IRowDetails {
   key: string
   value?: string
 }
@@ -11,8 +11,10 @@ export interface Row {
   styleUrls: ['./details-table.component.css']
 })
 export class DetailsTableComponent implements OnInit {
-  @Input() rows: Row[]
+  @Input() rows: IRowDetails[]
   @Input() title: string
+  @Input() sectionTitle: string
+  @Input() sectionURL: string
   @Input() createURL?: string
   @Input() updateURL?: string
   @Input() deleteURL?: string

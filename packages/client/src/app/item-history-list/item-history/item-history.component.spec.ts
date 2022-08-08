@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
+/* eslint-disable no-undef */
 
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ItemHistoryComponent } from './item-history.component'
 
 describe('ItemHistoryComponent', () => {
