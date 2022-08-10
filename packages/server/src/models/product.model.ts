@@ -8,12 +8,10 @@ const productSchema = new mongoose.Schema(
       max: 100
     },
     inStock: {
-      required: true,
-      type: Number
+      type: Number || null
     },
     quantity: {
-      required: true,
-      type: Number
+      type: Number || null
     },
     model: {
       type: String || null

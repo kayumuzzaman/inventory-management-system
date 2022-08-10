@@ -1,7 +1,6 @@
 <!-- component -->
-<app-details-table
-  [title]="title"
-  [rows]="rows"
-  [updateURL]="URL"
-  [deleteURL]="URL"
-></app-details-table>
+<app-details-table [title]="title" [rows]="rows" [updateURL]="URL" [deleteURL]="URL" [onUpdate]="onUpdate">
+</app-details-table>
+
+<app-product-edit [showModal]="showModal" [editMode]="true" [productId]="productId" (showModalEvent)="setModal($event)">
+</app-product-edit>

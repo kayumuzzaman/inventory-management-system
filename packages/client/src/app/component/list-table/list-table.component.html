@@ -4,30 +4,20 @@
       <div class="shadow-md rounded my-6">
         <table class="w-full">
           <thead>
-            <tr
-              class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal w-full"
-            >
-              <th
-                *ngFor="let column of columns"
-                [ngClass]="getWidth(column.width)"
-                class="py-3 px-6"
-              >
-                <div
-                  class="w-full"
-                  [ngClass]="
+            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal w-full">
+              <th *ngFor="let column of columns" [ngClass]="getWidth(column.width)" class="py-3 px-6">
+                <div class="w-full" [ngClass]="
                     column.alignment == Alignment.LEFT
                       ? 'text-left'
                       : 'text-right'
-                  "
-                >
+                  ">
                   {{ column.label }}
                 </div>
               </th>
             </tr>
           </thead>
           <tbody class="text-gray-600 text-sm font-light">
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let row of rows.content
                   | paginate
                     : {
@@ -36,23 +26,15 @@
                         totalItems: count
                       };
                 let i = index
-              "
-              class="border-b border-gray-200 hover:bg-gray-100"
-            >
-              <td
-                *ngFor="let column of columns"
-                class="py-3 px-6 cursor-pointer"
-              >
-                <div
-                  [ngClass]="
+              " class="border-b border-gray-200 hover:bg-gray-100">
+              <td *ngFor="let column of columns" class="py-3 px-6 cursor-pointer">
+                <div [ngClass]="
                     column.alignment == Alignment.LEFT
                       ? 'text-left'
                       : 'text-right'
-                  "
-                  (click)="rows.onClick && rows.onClick(row['id'].toString())"
-                >
+                  " (click)="rows.onClick && rows.onClick(row['id'].toString())">
                   <span class="font-normal">
-                    {{ row[column.key] }} {{ column.alignment }}
+                    {{ row[column.key] }}
                   </span>
                 </div>
               </td>
@@ -62,11 +44,7 @@
       </div>
       <ng-container>
         <div class="flex justify-center">
-          <pagination-controls
-            previousLabel="Prev"
-            nextLabel="Next"
-            (pageChange)="page = $event"
-          >
+          <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event">
           </pagination-controls>
         </div>
       </ng-container>

@@ -13,6 +13,8 @@ import { ItemHistoryListComponent } from './item-history-list/item-history-list.
 import { ItemHistoryComponent } from './item-history-list/item-history/item-history.component'
 import { DetailsTableComponent } from './component/details-table/details-table.component'
 import { ListTableComponent } from './component/list-table/list-table.component'
+import { ProductEditComponent } from './products/product-edit/product-edit.component'
+import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -24,13 +26,15 @@ import { ListTableComponent } from './component/list-table/list-table.component'
     ItemHistoryListComponent,
     ItemHistoryComponent,
     DetailsTableComponent,
-    ListTableComponent
+    ListTableComponent,
+    ProductEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxPaginationModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

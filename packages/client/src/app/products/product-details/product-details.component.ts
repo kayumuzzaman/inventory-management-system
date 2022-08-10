@@ -15,6 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   rows: IRowDetails[] = []
   productId: string | null
   URL: string = `${environment.baseURL}/products`
+  showModal: boolean = false
 
   constructor(
     private productService: ProductService,
@@ -52,5 +53,13 @@ export class ProductDetailsComponent implements OnInit {
           return this.rows
         })
     }
+  }
+
+  setModal(event: boolean) {
+    this.showModal = event
+  }
+
+  onUpdate = () => {
+    this.showModal = !this.showModal
   }
 }
