@@ -3,14 +3,21 @@ import { of, switchMap } from 'rxjs'
 import { fromFetch } from 'rxjs/fetch'
 import { environment } from 'src/environments/environment'
 
+export enum SearchBy {
+  PRODUCT_ID = 'product-id',
+  PRODUCT_NAME = 'product-name',
+  EMPLOYEE_ID = 'employee-id',
+  TYPE = 'type'
+}
+
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ItemService {
   constructor() {}
 
-  getAllProducts() {
-    return fromFetch(`${environment.baseURL}/product/`).pipe(
+  getItemDetails(id: string) {
+    return fromFetch(`${environment.baseURL}/item/${id}`).pipe(
       switchMap((response) => {
         if (response.ok) {
           return response.json()
@@ -21,8 +28,8 @@ export class ProductService {
     )
   }
 
-  getProductDetails(id: string) {
-    return fromFetch(`${environment.baseURL}/product/${id}`).pipe(
+  getItemsBySearch(searchBy: SearchBy, id: string) {
+    return fromFetch(`${environment.baseURL}/item/${searchBy}/${id}`).pipe(
       switchMap((response) => {
         if (response.ok) {
           return response.json()

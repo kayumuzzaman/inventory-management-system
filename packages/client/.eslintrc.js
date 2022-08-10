@@ -38,7 +38,7 @@ module.exports = {
           { type: 'element', prefix: 'app', style: 'kebab-case' }
         ],
         '@angular-eslint/no-empty-lifecycle-method': 'off',
-        '@typescript-eslint/no-unused-vars': 'error',
+        '@typescript-eslint/no-unused-vars': 'off',
         'no-unused-vars': 'off'
       }
     },

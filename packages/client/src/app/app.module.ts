@@ -13,6 +13,8 @@ import { ItemHistoryListComponent } from './item-history-list/item-history-list.
 import { ItemHistoryComponent } from './item-history-list/item-history/item-history.component'
 import { DetailsTableComponent } from './component/details-table/details-table.component'
 import { ListTableComponent } from './component/list-table/list-table.component'
+import { ItemDetailsComponent } from './item/item-details/item-details.component'
+import { ItemListComponent } from './item/item-list/item-list.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ListTableComponent } from './component/list-table/list-table.component'
     ItemHistoryListComponent,
     ItemHistoryComponent,
     DetailsTableComponent,
-    ListTableComponent
+    ListTableComponent,
+    ItemDetailsComponent,
+    ItemListComponent
   ],
   imports: [
     BrowserModule,

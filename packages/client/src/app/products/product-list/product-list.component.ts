@@ -28,34 +28,33 @@ interface IProductData {
 export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) {}
 
-  products!: Product[]
   page: number = 1
   count: number = 0
   tableSize: number = 10
-  title: string = 'product list'
+  title: string = 'All products'
   columns: IColumn[] = [
     {
       key: 'name',
       label: 'Product name',
-      width: 6,
+      width: 50,
       alignment: Alignment.LEFT
     },
     {
       key: 'type',
       label: 'Type',
-      width: 2,
+      width: 20,
       alignment: Alignment.LEFT
     },
     {
       key: 'quantity',
       label: 'Quantity',
-      width: 2,
+      width: 15,
       alignment: Alignment.LEFT
     },
     {
       key: 'inStock',
       label: 'In stock',
-      width: 2,
+      width: 15,
       alignment: Alignment.RIGHT
     }
   ]
@@ -86,8 +85,6 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((response) => {
-      this.products = response?.data
-
       this.rows = { ...this.rows, content: this.getRows(response?.data) }
     })
   }
