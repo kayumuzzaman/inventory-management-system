@@ -111,6 +111,19 @@ export const updateItemStatusService = async (id: string, data: any) => {
 export const deleteItemStatusService = async (id: string) => {
   // TODO: make the item status available in items collection
   try {
+    const oldItem = await ItemStatus.findById(id)
+
+    if (oldItem) {
+      const item = {
+        itemId: oldItem.itemId,
+        employeeName: oldItem.employeeName,
+        receivedDate: oldItem.receivedDate,
+        returnedDate: oldItem.returnedDate,
+        description: oldItem.description
+      }
+      await ItemStatusHistory.create(item)
+    }
+
     const item = await ItemStatus.findByIdAndDelete(id)
     if (!item)
       return {

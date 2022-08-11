@@ -19,6 +19,7 @@ export class DetailsTableComponent implements OnInit {
   @Input() updateURL?: string
   @Input() deleteURL?: string
   @Input() onUpdate: () => void
+  @Input() onDelete: () => void
 
   constructor() {}
 

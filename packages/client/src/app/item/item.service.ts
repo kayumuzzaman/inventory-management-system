@@ -1,5 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { of, switchMap } from 'rxjs'
+import { catchError, of, switchMap } from 'rxjs'
 import { fromFetch } from 'rxjs/fetch'
 import { environment } from 'src/environments/environment'
 
@@ -14,7 +15,13 @@ export enum SearchBy {
   providedIn: 'root'
 })
 export class ItemService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
 
   getItemDetails(id: string) {
     return fromFetch(`${environment.baseURL}/item/${id}`).pipe(
@@ -38,5 +45,18 @@ export class ItemService {
         }
       })
     )
+  }
+
+  deleteItemsByProductId(productId: string) {
+    return this.http
+      .delete(
+        `${environment.baseURL}/item/product/${productId}`,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error) => {
+          return of({ error: error })
+        })
+      )
   }
 }

@@ -43,7 +43,7 @@ export class ProductService {
 
   createProduct(product: Product) {
     return this.http
-      .post(`http://localhost:3000/product/add`, product, this.httpOptions)
+      .post(`${environment.baseURL}/product/add`, product, this.httpOptions)
       .pipe(
         catchError((error) => {
           return of({ error: error })
@@ -55,7 +55,7 @@ export class ProductService {
   updateProduct(productId: string, product: Product) {
     return this.http
       .put(
-        `http://localhost:3000/product/${productId}`,
+        `${environment.baseURL}/product/${productId}`,
         product,
         this.httpOptions
       )
@@ -65,5 +65,15 @@ export class ProductService {
         })
       )
       .subscribe()
+  }
+
+  deleteProduct(productId: string) {
+    return this.http
+      .delete(`${environment.baseURL}/product/${productId}`, this.httpOptions)
+      .pipe(
+        catchError((error) => {
+          return of({ error: error })
+        })
+      )
   }
 }
