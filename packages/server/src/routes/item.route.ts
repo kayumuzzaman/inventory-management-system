@@ -1,6 +1,7 @@
 import express from 'express'
 import {
   deleteItems,
+  deleteItemsByProductId,
   getAllItems,
   getItemDetails,
   getItemsBySearch,
@@ -16,5 +17,6 @@ router.get('/:searchBy/:id', getItemsBySearch)
 router.post('/add', insertItems)
 router.put('/:id', updateItems)
 router.delete('/:id', deleteItems)
+router.delete('/product/:id', deleteItemsByProductId)
 
 export default router

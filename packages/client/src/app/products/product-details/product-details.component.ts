@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { IRowDetails } from 'src/app/component/details-table/details-table.component'
-import { SearchBy } from 'src/app/item/item.service'
+import { ItemService, SearchBy } from 'src/app/item/item.service'
 import { environment } from 'src/environments/environment'
 import { ProductService } from '../product.service'
 
@@ -15,11 +15,14 @@ export class ProductDetailsComponent implements OnInit {
   rows: IRowDetails[] = []
   productId: string
   URL: string = `${environment.baseURL}/products`
+  showModal: boolean = false
   searchBy: SearchBy = SearchBy.PRODUCT_ID
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private itemService: ItemService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +55,23 @@ export class ProductDetailsComponent implements OnInit {
           ]
           return this.rows
         })
+    }
+  }
+
+  setModal(event: boolean) {
+    this.showModal = event
+  }
+
+  onUpdate = () => {
+    this.showModal = !this.showModal
+  }
+
+  onDelete = () => {
+    /* eslint-disable no-undef */
+    if (confirm('Confirm deletion?')) {
+      this.productService.deleteProduct(this.productId).subscribe()
+      this.itemService.deleteItemsByProductId(this.productId).subscribe()
+      this.router.navigate(['/products'])
     }
   }
 }

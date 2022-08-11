@@ -13,6 +13,8 @@ import { ItemHistoryListComponent } from './item-history-list/item-history-list.
 import { ItemHistoryComponent } from './item-history-list/item-history/item-history.component'
 import { DetailsTableComponent } from './component/details-table/details-table.component'
 import { ListTableComponent } from './component/list-table/list-table.component'
+import { ProductEditComponent } from './products/product-edit/product-edit.component'
+import { ReactiveFormsModule } from '@angular/forms'
 import { ItemDetailsComponent } from './item/item-details/item-details.component'
 import { ItemListComponent } from './item/item-list/item-list.component'
 
@@ -27,6 +29,7 @@ import { ItemListComponent } from './item/item-list/item-list.component'
     ItemHistoryComponent,
     DetailsTableComponent,
     ListTableComponent,
+    ProductEditComponent,
     ItemDetailsComponent,
     ItemListComponent
   ],
@@ -34,7 +37,8 @@ import { ItemListComponent } from './item/item-list/item-list.component'
     BrowserModule,
     AppRoutingModule,
     NgxPaginationModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,6 +17,7 @@ interface IProductData {
   inStock: number
   quantity: number
   type: string
+  model: string
   __v: number
 }
 
@@ -31,17 +32,24 @@ export class ProductListComponent implements OnInit {
   page: number = 1
   count: number = 0
   tableSize: number = 10
+  showModal: boolean = false
   title: string = 'All products'
   columns: IColumn[] = [
     {
       key: 'name',
       label: 'Product name',
-      width: 50,
+      width: 30,
       alignment: Alignment.LEFT
     },
     {
       key: 'type',
       label: 'Type',
+      width: 20,
+      alignment: Alignment.LEFT
+    },
+    {
+      key: 'model',
+      label: 'Model',
       width: 20,
       alignment: Alignment.LEFT
     },
@@ -59,6 +67,12 @@ export class ProductListComponent implements OnInit {
     }
   ]
 
+  ngOnInit(): void {
+    this.productService.getAllProducts().subscribe((response) => {
+      this.rows = { ...this.rows, content: this.getRows(response?.data) }
+    })
+  }
+
   onClick = (id: string) => {
     this.router.navigate([`/products/details/${id}`])
   }
@@ -75,6 +89,7 @@ export class ProductListComponent implements OnInit {
         id: row._id,
         name: row.productName,
         type: row.type,
+        model: row.model,
         quantity: row.quantity,
         inStock: row.inStock
       }
@@ -83,9 +98,7 @@ export class ProductListComponent implements OnInit {
     return rowValues
   }
 
-  ngOnInit(): void {
-    this.productService.getAllProducts().subscribe((response) => {
-      this.rows = { ...this.rows, content: this.getRows(response?.data) }
-    })
+  setModal(event: boolean) {
+    this.showModal = event
   }
 }

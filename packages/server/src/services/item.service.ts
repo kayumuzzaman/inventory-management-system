@@ -140,3 +140,29 @@ export const deleteItemservice = async (id: string) => {
     }
   }
 }
+
+export const deleteItemsByProductIdService = async (id: string) => {
+  try {
+    const item = await Items.deleteMany({ productId: id })
+
+    if (item) {
+      return {
+        error: false,
+        deleted: true,
+        statusCode: 202,
+        data: item
+      }
+    }
+    return {
+      error: true,
+      statusCode: 404,
+      message: 'item not found'
+    }
+  } catch (errors) {
+    return {
+      error: true,
+      statusCode: 500,
+      errors
+    }
+  }
+}

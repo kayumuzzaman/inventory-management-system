@@ -1,4 +1,5 @@
 import {
+  deleteItemsByProductIdService,
   deleteItemservice,
   getAllItemservice,
   getItemDetailsService,
@@ -38,5 +39,13 @@ export const updateItems = async (req: any, res: any) => {
 export const deleteItems = async (req: any, res: any) => {
   const { id } = req.params
   const response = await deleteItemservice(id)
+  return res.status(response.statusCode).send(response)
+}
+
+export const deleteItemsByProductId = async (req: any, res: any) => {
+  const { id } = req.params
+  console.log(id)
+
+  const response = await deleteItemsByProductIdService(id)
   return res.status(response.statusCode).send(response)
 }
