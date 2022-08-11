@@ -9,14 +9,13 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ProductDetailsComponent } from './products/product-details/product-details.component'
 import { NgxPaginationModule } from 'ngx-pagination'
 import { HttpClientModule } from '@angular/common/http'
-import { ItemHistoryListComponent } from './item-history-list/item-history-list.component'
-import { ItemHistoryComponent } from './item-history-list/item-history/item-history.component'
 import { DetailsTableComponent } from './component/details-table/details-table.component'
 import { ListTableComponent } from './component/list-table/list-table.component'
 import { ProductEditComponent } from './products/product-edit/product-edit.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ItemDetailsComponent } from './item/item-details/item-details.component'
 import { ItemListComponent } from './item/item-list/item-list.component'
+import { ItemHistoryListComponent } from './item-history/item-history-list/item-history-list.component'
 
 @NgModule({
   declarations: [
@@ -25,13 +24,12 @@ import { ItemListComponent } from './item/item-list/item-list.component'
     ProductsComponent,
     ProductListComponent,
     ProductDetailsComponent,
-    ItemHistoryListComponent,
-    ItemHistoryComponent,
     DetailsTableComponent,
     ListTableComponent,
     ProductEditComponent,
     ItemDetailsComponent,
-    ItemListComponent
+    ItemListComponent,
+    ItemHistoryListComponent
   ],
   imports: [
     BrowserModule,

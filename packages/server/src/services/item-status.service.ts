@@ -23,13 +23,13 @@ export const getAllItemStatusService = async () => {
 
 export const getItemStatusService = async (id: string) => {
   try {
-    const item = await ItemStatus.findById(id)
+    const item = await ItemStatus.find({ itemId: id })
 
     if (item) {
       return {
         error: false,
         statusCode: 200,
-        data: item
+        data: item[0]
       }
     }
 
@@ -78,7 +78,8 @@ export const insertItemStatusService = async (data: any) => {
 export const updateItemStatusService = async (id: string, data: any) => {
   // TODO: do check if item is changed, then make the item status available in items collection
   try {
-    const oldItem = await ItemStatus.findById(id)
+    const oldItem = (await ItemStatus.find({ itemId: id }))[0]
+    console.log(oldItem)
 
     if (oldItem) {
       const item = {
@@ -90,7 +91,7 @@ export const updateItemStatusService = async (id: string, data: any) => {
       }
       await ItemStatusHistory.create(item)
     }
-    await ItemStatus.findByIdAndDelete(id)
+    await ItemStatus.findByIdAndDelete(oldItem._id)
     const newItem = await ItemStatus.create(data)
 
     return {
@@ -111,7 +112,7 @@ export const updateItemStatusService = async (id: string, data: any) => {
 export const deleteItemStatusService = async (id: string) => {
   // TODO: make the item status available in items collection
   try {
-    const oldItem = await ItemStatus.findById(id)
+    const oldItem = (await ItemStatus.find({ itemId: id }))[0]
 
     if (oldItem) {
       const item = {
@@ -124,7 +125,7 @@ export const deleteItemStatusService = async (id: string) => {
       await ItemStatusHistory.create(item)
     }
 
-    const item = await ItemStatus.findByIdAndDelete(id)
+    const item = await ItemStatus.findByIdAndDelete(oldItem._id)
     if (!item)
       return {
         error: true,

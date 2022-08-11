@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { ItemHistoryListComponent } from './item-history-list/item-history-list.component'
 import { ItemDetailsComponent } from './item/item-details/item-details.component'
 import { ProductDetailsComponent } from './products/product-details/product-details.component'
 import { ProductListComponent } from './products/product-list/product-list.component'
@@ -8,7 +7,6 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'products/details/:id', component: ProductDetailsComponent },
-  { path: 'item-history', component: ItemHistoryListComponent },
   { path: 'items/details/:id', component: ItemDetailsComponent }
 ]
 
