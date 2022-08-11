@@ -1,5 +1,12 @@
 import Items from '../models/item.model'
 
+enum SearchBy {
+  PRODUCT_ID = 'product-id',
+  PRODUCT_NAME = 'product-name',
+  EMPLOYEE_ID = 'employee-id',
+  TYPE = 'type'
+}
+
 export const getAllItemservice = async () => {
   try {
     const item = await Items.find()
@@ -16,6 +23,29 @@ export const getAllItemservice = async () => {
       statusCode: 500,
       errors
     }
+  }
+}
+
+export const getItemsBySearchService = async (searchBy: string, id: string) => {
+  if (searchBy === SearchBy.PRODUCT_ID) {
+    const items = await Items.find({ productId: id })
+    if (items) {
+      return {
+        error: false,
+        statusCode: 200,
+        data: items
+      }
+    }
+    return {
+      error: false,
+      statusCode: 404,
+      messages: 'No items found'
+    }
+  }
+  return {
+    error: false,
+    statusCode: 404,
+    messages: 'No items found'
   }
 }
 

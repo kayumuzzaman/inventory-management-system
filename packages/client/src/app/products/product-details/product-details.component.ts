@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { IRowDetails } from 'src/app/component/details-table/details-table.component'
+import { SearchBy } from 'src/app/item/item.service'
 import { environment } from 'src/environments/environment'
 import { ProductService } from '../product.service'
 
@@ -11,11 +12,11 @@ import { ProductService } from '../product.service'
 })
 export class ProductDetailsComponent implements OnInit {
   title: string = 'Product Details'
-  sectionTitle: string = 'Item list of this product'
   rows: IRowDetails[] = []
-  productId: string | null
+  productId: string
   URL: string = `${environment.baseURL}/products`
   showModal: boolean = false
+  searchBy: SearchBy = SearchBy.PRODUCT_ID
 
   constructor(
     private productService: ProductService,
@@ -23,7 +24,7 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productId = this.route.snapshot.paramMap.get('id')
+    this.productId = this.route.snapshot.paramMap.get('id') || ''
     if (this.productId) {
       this.productService
         .getProductDetails(this.productId)

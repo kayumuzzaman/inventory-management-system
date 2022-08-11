@@ -15,6 +15,8 @@ import { DetailsTableComponent } from './component/details-table/details-table.c
 import { ListTableComponent } from './component/list-table/list-table.component'
 import { ProductEditComponent } from './products/product-edit/product-edit.component'
 import { ReactiveFormsModule } from '@angular/forms'
+import { ItemDetailsComponent } from './item/item-details/item-details.component'
+import { ItemListComponent } from './item/item-list/item-list.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ReactiveFormsModule } from '@angular/forms'
     ItemHistoryComponent,
     DetailsTableComponent,
     ListTableComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    ItemDetailsComponent,
+    ItemListComponent
   ],
   imports: [
     BrowserModule,

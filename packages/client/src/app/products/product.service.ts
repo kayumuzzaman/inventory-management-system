@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core'
 import { catchError, of, switchMap } from 'rxjs'
 import { fromFetch } from 'rxjs/fetch'
 import { Product } from './product.model'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ProductService {
   }
 
   getAllProducts() {
-    return fromFetch(`http://localhost:3000/product/`).pipe(
+    return fromFetch(`${environment.baseURL}/product/`).pipe(
       switchMap((response) => {
         if (response.ok) {
           return response.json()
@@ -29,7 +30,7 @@ export class ProductService {
   }
 
   getProductDetails(id: string) {
-    return fromFetch(`http://localhost:3000/product/${id}`).pipe(
+    return fromFetch(`${environment.baseURL}/product/${id}`).pipe(
       switchMap((response) => {
         if (response.ok) {
           return response.json()

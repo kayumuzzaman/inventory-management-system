@@ -1,53 +1,60 @@
-<div class="overflow-x-auto">
-  <div class="min-w-screen min-h-screen flex justify-center bg-white font-sans">
-    <div class="w-full lg:w-5/6">
-      <div class="shadow-md rounded my-6">
-        <table class="w-full">
-          <thead>
-            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal w-full">
-              <th *ngFor="let column of columns" [ngClass]="getWidth(column.width)" class="py-3 px-6">
-                <div class="w-full" [ngClass]="
-                    column.alignment == Alignment.LEFT
-                      ? 'text-left'
-                      : 'text-right'
-                  ">
-                  {{ column.label }}
-                </div>
-              </th>
-            </tr>
-          </thead>
-          <tbody class="text-gray-600 text-sm font-light">
-            <tr *ngFor="
-                let row of rows.content
-                  | paginate
-                    : {
-                        itemsPerPage: tableSize,
-                        currentPage: page,
-                        totalItems: count
-                      };
-                let i = index
-              " class="border-b border-gray-200 hover:bg-gray-100">
-              <td *ngFor="let column of columns" class="py-3 px-6 cursor-pointer">
-                <div [ngClass]="
-                    column.alignment == Alignment.LEFT
-                      ? 'text-left'
-                      : 'text-right'
-                  " (click)="rows.onClick && rows.onClick(row['id'].toString())">
-                  <span class="font-normal">
-                    {{ row[column.key] }}
-                  </span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <ng-container>
-        <div class="flex justify-center">
-          <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event">
-          </pagination-controls>
+<div>
+  <div class="flex">
+    <div class="w-full text-center lg:w-4/6 m-auto p-3 border-2 font-bold text-xl mb-1 mt-1 shadow-lg">
+      {{ title }}
+    </div>
+  </div>
+  <div class="overflow-x-auto">
+    <div class="flex justify-center bg-white font-sans">
+      <div class="w-full lg:w-4/6">
+        <div class="mb-6">
+          <table class="w-full table-auto shadow-md rounded">
+            <thead>
+              <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal w-full">
+                <th *ngFor="let column of columns" [ngStyle]="getWidth(column.width)">
+                  <div class="w-full py-3 px-6" [ngClass]="
+                      column.alignment == Alignment.LEFT
+                        ? 'text-left'
+                        : 'text-right'
+                    ">
+                    {{ column.label }}
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+              <tr *ngFor="
+                  let row of rows.content
+                    | paginate
+                      : {
+                          itemsPerPage: tableSize,
+                          currentPage: page,
+                          totalItems: count
+                        };
+                  let i = index
+                " class="border-b border-gray-200 hover:bg-gray-100">
+                <td *ngFor="let column of columns" class="py-3 px-6 cursor-pointer">
+                  <div [ngClass]="
+                      column.alignment == Alignment.LEFT
+                        ? 'text-left'
+                        : 'text-right'
+                    " (click)="rows.onClick && rows.onClick(row['id'].toString())">
+                    <span class="font-normal">
+                      {{ row[column.key] }}
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </ng-container>
+        <ng-container>
+          <div class="flex justify-center">
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event">
+            </pagination-controls>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>
