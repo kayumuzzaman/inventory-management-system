@@ -8,7 +8,7 @@ export interface IColumn {
 }
 
 export interface IRowContent {
-  [key: string]: string | number | Date
+  [key: string]: string | number | boolean | Date
 }
 
 export interface IRows {
@@ -40,6 +40,6 @@ export class ListTableComponent implements OnInit {
   ngOnInit(): void {}
 
   getWidth = (width: number) => {
-    return `w-${width}/12`
+    return { width: `${width}%` }
   }
 }

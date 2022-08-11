@@ -18,7 +18,7 @@ module.exports = {
     // Can remove any of these to set rules, initially set all to 0 to ignore
     'prettier/prettier': 'error',
     'no-param-reassign': 'off',
-    'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
+    'no-unused-vars': 'off',
     'import/no-unresolved': 0,
     'import/extensions': 0,
     'func-names': 0,
@@ -33,6 +33,7 @@ module.exports = {
     'no-console': 0,
     'no-restricted-globals': 0,
     'no-use-before-define': 0,
-    'arrow-body-style': 0
+    'arrow-body-style': 0,
+    'no-shadow': 0
   }
 }

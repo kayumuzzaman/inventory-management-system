@@ -5,6 +5,7 @@ const itemStatusSchema = new mongoose.Schema(
   {
     itemId: ObjectId,
     employeeName: String || null,
+    employeeId: String || null,
     receivedDate: Date || null,
     returnedDate: Date || null,
     description: String || null

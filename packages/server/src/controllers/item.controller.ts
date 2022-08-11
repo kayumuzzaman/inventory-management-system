@@ -2,12 +2,19 @@ import {
   deleteItemservice,
   getAllItemservice,
   getItemDetailsService,
+  getItemsBySearchService,
   insertItemservice,
   updateItemservice
 } from '../services/item.service'
 
 export const getAllItems = async (req: any, res: any) => {
   const response = await getAllItemservice()
+  return res.status(response.statusCode).send(response)
+}
+
+export const getItemsBySearch = async (req: any, res: any) => {
+  const { searchBy, id } = req.params
+  const response = await getItemsBySearchService(searchBy, id)
   return res.status(response.statusCode).send(response)
 }
 
