@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core'
 import { catchError, of, switchMap } from 'rxjs'
 import { fromFetch } from 'rxjs/fetch'
 import { environment } from 'src/environments/environment'
+import { Item } from './item.model'
 
 export enum SearchBy {
   PRODUCT_ID = 'product-id',
@@ -21,6 +22,28 @@ export class ItemService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
+  }
+
+  createItem = (item: Item) => {
+    return this.http
+      .post(`${environment.baseURL}/item/add`, item, this.httpOptions)
+      .pipe(
+        catchError((error) => {
+          return of({ error: error })
+        })
+      )
+      .subscribe()
+  }
+
+  updateItem = (itemId: string, item: Item) => {
+    return this.http
+      .put(`${environment.baseURL}/item/${itemId}`, item, this.httpOptions)
+      .pipe(
+        catchError((error) => {
+          return of({ error: error })
+        })
+      )
+      .subscribe()
   }
 
   getItemDetails(id: string) {

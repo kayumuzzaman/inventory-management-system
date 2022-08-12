@@ -1,4 +1,11 @@
 <!-- component -->
+<app-item-edit
+  [showModal]="showModal"
+  [editMode]="false"
+  (showModalEvent)="setModal($event)"
+  [productId]="productId"
+></app-item-edit>
+
 <app-list-table
   [title]="title"
   [columns]="columns"
@@ -6,4 +13,5 @@
   [page]="page"
   [count]="count"
   [tableSize]="tableSize"
+  [onButtonClick]="onCreateButtonClick"
 ></app-list-table>

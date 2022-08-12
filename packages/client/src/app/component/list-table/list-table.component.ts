@@ -33,6 +33,7 @@ export class ListTableComponent implements OnInit {
   @Input() page?: number
   @Input() count?: number
   @Input() tableSize?: number
+  @Input() onButtonClick?: () => void
 
   Alignment = Alignment
   constructor() {}

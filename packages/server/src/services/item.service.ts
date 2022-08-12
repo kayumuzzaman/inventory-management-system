@@ -1,5 +1,8 @@
 import { stat } from 'fs'
+import { Types } from 'mongoose'
+import itemStatusModel from '../models/item-status.model'
 import Items from '../models/item.model'
+import productModel from '../models/product.model'
 import { getItemStatusService } from './item-status.service'
 
 enum SearchBy {
@@ -30,12 +33,51 @@ export const getAllItemservice = async () => {
 
 export const getItemsBySearchService = async (searchBy: string, id: string) => {
   if (searchBy === SearchBy.PRODUCT_ID) {
-    const items = await Items.find({ productId: id })
+    const products = await productModel.find()
+    let productIdToName: { [key: string]: string } = {}
+    products.forEach((product) => {
+      productIdToName = {
+        ...productIdToName,
+        [product._id.toString()]: product.productName
+      }
+    })
+
+    const statuses = await itemStatusModel.find({ productId: id })
+    let itemsBooked: { [key: string]: boolean } = {}
+    statuses.forEach((status) => {
+      if (status.itemId?.toString()) {
+        if (status.employeeId) {
+          itemsBooked = {
+            ...itemsBooked,
+            [status.itemId?.toString()]: true
+          }
+        } else {
+          itemsBooked = {
+            ...itemsBooked,
+            [status.itemId?.toString()]: false
+          }
+        }
+      }
+    })
+
+    const items = await Items.find({ productId: id }).lean()
+    const itemsWithProductName: any = []
+    items.forEach((item) => {
+      if (item.productId?.toString()) {
+        const newItem = {
+          ...item,
+          productName: productIdToName[item.productId.toString()],
+          isAvailable: !itemsBooked[item._id.toString()] ?? true
+        }
+        itemsWithProductName.push(newItem)
+      }
+    })
+
     if (items) {
       return {
         error: false,
         statusCode: 200,
-        data: items
+        data: itemsWithProductName
       }
     }
     return {
@@ -53,14 +95,26 @@ export const getItemsBySearchService = async (searchBy: string, id: string) => {
 
 export const getItemDetailsService = async (id: string) => {
   try {
-    const item = await Items.findById(id)
+    const item = await Items.findById(id).lean()
+    let itemWithProduct: {
+      [key: string]: Types.ObjectId | string | undefined
+    } = { ...item }
+    if (item?.productId) {
+      const product = await productModel.findById(item.productId)
+      if (product?.productName) {
+        itemWithProduct = {
+          ...itemWithProduct,
+          productName: product.productName
+        }
+      }
+    }
     const status = (await getItemStatusService(id)).data
 
     if (item) {
       return {
         error: false,
         statusCode: 201,
-        data: { item, status }
+        data: { item: itemWithProduct, status }
       }
     }
     return {

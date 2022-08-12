@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { ItemDetailsComponent } from './item/item-details/item-details.component'
 import { ItemListComponent } from './item/item-list/item-list.component'
 import { ItemHistoryListComponent } from './item-history/item-history-list/item-history-list.component'
+import { ItemEditComponent } from './item/item-edit/item-edit.component'
+import { ClickOutsideModule } from 'ng-click-outside'
 
 @NgModule({
   declarations: [
@@ -29,14 +31,16 @@ import { ItemHistoryListComponent } from './item-history/item-history-list/item-
     ProductEditComponent,
     ItemDetailsComponent,
     ItemListComponent,
-    ItemHistoryListComponent
+    ItemHistoryListComponent,
+    ItemEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxPaginationModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClickOutsideModule
   ],
   providers: [],
   bootstrap: [AppComponent]

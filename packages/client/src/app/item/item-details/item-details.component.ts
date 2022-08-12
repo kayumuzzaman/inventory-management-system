@@ -23,7 +23,7 @@ export class ItemDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.itemId = this.route.snapshot.paramMap.get('id') || ''
+    this.itemId = this.route.snapshot.paramMap.get('itemId') || ''
     if (this.itemId) {
       this.itemService.getItemDetails(this.itemId).subscribe((response) => {
         this.itemDetails = [
@@ -49,16 +49,25 @@ export class ItemDetailsComponent implements OnInit {
             {
               key: 'Employee name',
               value: response.data.status.employeeName
-            },
-            {
-              key: 'Received date',
-              value: new Date(response.data.status.receivedDate).toDateString()
-            },
-            {
-              key: 'Returned date',
-              value: new Date(response.data.status.returnedDate).toDateString()
             }
           ]
+          if (response.data.status.employeeName) {
+            this.statusDetails = [
+              ...this.statusDetails,
+              {
+                key: 'Received date',
+                value: new Date(
+                  response.data.status.receivedDate
+                ).toDateString()
+              },
+              {
+                key: 'Returned date',
+                value: new Date(
+                  response.data.status.returnedDate
+                ).toDateString()
+              }
+            ]
+          }
         }
         // return this.rows
       })

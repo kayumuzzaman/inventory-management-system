@@ -1,11 +1,17 @@
 <!-- component -->
-<div class="flex justify-end lg:mr-40" data-modal-toggle="authentication-modal">
-    <button class="bg-green-600 mr-4 mt-4 lg:mr-24 hover:bg-green-900 text-white font-bold py-2 px-4 rounded"
-        (click)="showModal = !showModal">
-        Create</button>
-</div>
+<app-product-edit
+  [showModal]="showModal"
+  [editMode]="false"
+  (showModalEvent)="setModal($event)"
+></app-product-edit>
 
-<app-product-edit [showModal]="showModal" [editMode]="false" (showModalEvent)="setModal($event)"></app-product-edit>
-
-<app-list-table [title]="title" [columns]="columns" [rows]="rows" [page]="page" [count]="count" [tableSize]="tableSize">
+<app-list-table
+  [title]="title"
+  [columns]="columns"
+  [rows]="rows"
+  [page]="page"
+  [count]="count"
+  [tableSize]="tableSize"
+  [onButtonClick]="onCreateButtonClick"
+>
 </app-list-table>
