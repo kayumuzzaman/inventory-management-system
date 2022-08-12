@@ -1,6 +1,5 @@
-/* eslint-disable no-undef */
-
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+
 import { ItemHistoryListComponent } from './item-history-list.component'
 
 describe('ItemHistoryListComponent', () => {

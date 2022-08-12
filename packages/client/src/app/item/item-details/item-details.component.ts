@@ -10,8 +10,10 @@ import { ItemService } from '../item.service'
   styleUrls: ['./item-details.component.css']
 })
 export class ItemDetailsComponent implements OnInit {
-  title: string = 'Item Details'
-  rows: IRowDetails[] = []
+  detailsTitle: string = 'Item details'
+  statusTitle: string = 'Item status'
+  itemDetails: IRowDetails[] = []
+  statusDetails: IRowDetails[] = []
   itemId: string
   URL: string = `${environment.baseURL}/item`
 
@@ -24,25 +26,41 @@ export class ItemDetailsComponent implements OnInit {
     this.itemId = this.route.snapshot.paramMap.get('id') || ''
     if (this.itemId) {
       this.itemService.getItemDetails(this.itemId).subscribe((response) => {
-        this.rows = [
+        this.itemDetails = [
           {
             key: 'Item name',
-            value: response.data.itemName
+            value: response.data.item.itemName
           },
           {
             key: 'Product',
-            value: response.data.productName
+            value: response.data.item.productName
           },
           {
             key: 'Created at',
-            value: response.data.createdAt
+            value: new Date(response.data.item.createdAt).toDateString()
           },
           {
             key: 'Availability',
-            value: response.data.isAvailable ? 'Yes' : 'No'
+            value: !response.data.status?.employeeId ? 'Yes' : 'No'
           }
         ]
-        return this.rows
+        if (response.data.status) {
+          this.statusDetails = [
+            {
+              key: 'Employee name',
+              value: response.data.status.employeeName
+            },
+            {
+              key: 'Received date',
+              value: new Date(response.data.status.receivedDate).toDateString()
+            },
+            {
+              key: 'Returned date',
+              value: new Date(response.data.status.returnedDate).toDateString()
+            }
+          ]
+        }
+        // return this.rows
       })
     }
   }

@@ -1,4 +1,6 @@
+import { stat } from 'fs'
 import Items from '../models/item.model'
+import { getItemStatusService } from './item-status.service'
 
 enum SearchBy {
   PRODUCT_ID = 'product-id',
@@ -52,11 +54,13 @@ export const getItemsBySearchService = async (searchBy: string, id: string) => {
 export const getItemDetailsService = async (id: string) => {
   try {
     const item = await Items.findById(id)
+    const status = (await getItemStatusService(id)).data
+
     if (item) {
       return {
         error: false,
         statusCode: 201,
-        data: item
+        data: { item, status }
       }
     }
     return {

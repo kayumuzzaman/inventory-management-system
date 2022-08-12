@@ -1,6 +1,14 @@
 <app-details-table
-  [title]="title"
-  [rows]="rows"
+  [title]="detailsTitle"
+  [rows]="itemDetails"
   [updateURL]="URL"
   [deleteURL]="URL"
 ></app-details-table>
+<app-details-table
+  *ngIf="statusDetails.length > 0"
+  [title]="statusTitle"
+  [rows]="statusDetails"
+  [noMargin]="true"
+  [updateURL]="URL"
+></app-details-table>
+<app-item-history-list [itemId]="itemId"></app-item-history-list>

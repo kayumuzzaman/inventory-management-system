@@ -22,7 +22,7 @@ export const getAllItemStatusHistoryService = async () => {
 
 export const getItemStatusHistoryService = async (id: string) => {
   try {
-    const item = await ItemStatusHistory.findById(id)
+    const item = await ItemStatusHistory.find({ itemId: id })
 
     if (!item) {
       return {
