@@ -8,7 +8,7 @@ import {
 } from 'src/app/component/list-table/list-table.component'
 import { ItemService, SearchBy } from '../item.service'
 
-interface IItemData {
+export interface IItemData {
   _id: string
   productId: string
   productName: string
@@ -32,12 +32,13 @@ export class ItemListComponent implements OnInit {
   constructor(private itemService: ItemService, private router: Router) {}
 
   @Input() searchBy: SearchBy
-  @Input() id: string
+  @Input() productId: string
 
   page: number = 1
   count: number = 0
   tableSize: number = 10
   title: string = 'Items of this product'
+  showModal: boolean = false
 
   columns: IColumn[] = [
     {
@@ -70,9 +71,17 @@ export class ItemListComponent implements OnInit {
     this.router.navigate([`/items/details/${id}`])
   }
 
+  onCreateButtonClick = () => {
+    this.showModal = !this.showModal
+  }
+
   rows: IRows = {
     onClick: this.onClick,
     content: []
+  }
+
+  setModal(event: boolean) {
+    this.showModal = event
   }
 
   getRows = (rows: IItemData[]) => {
@@ -83,7 +92,7 @@ export class ItemListComponent implements OnInit {
         itemName: row.itemName,
         productName: row.productName,
         createdAt: new Date(row.createdAt).toDateString(),
-        isAvailable: row.isAvailable
+        isAvailable: row.isAvailable ? 'YES' : 'NO'
       }
       rowValues.push(entry)
     })
@@ -92,7 +101,7 @@ export class ItemListComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemService
-      .getItemsBySearch(this.searchBy, this.id)
+      .getItemsBySearch(this.searchBy, this.productId)
       .subscribe((response) => {
         this.rows = { ...this.rows, content: this.getRows(response?.data) }
       })

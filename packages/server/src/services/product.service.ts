@@ -1,3 +1,5 @@
+import itemStatusModel from '../models/item-status.model'
+import itemModel from '../models/item.model'
 import Products from '../models/product.model'
 
 export const getAllProductService = async () => {
@@ -22,11 +24,28 @@ export const getAllProductService = async () => {
 export const getProductDetailsService = async (id: string) => {
   try {
     const product = await Products.findById(id)
+    const quantity = (await itemModel.find({ productId: id })).length
+    const stasuses = await itemStatusModel
+      .find({
+        productId: id
+      })
+      .lean()
+    let booked = 0
+    stasuses.forEach((status) => {
+      if (status.employeeId !== null) booked += 1
+    })
+    const inStock = quantity - booked
     if (product) {
       return {
         error: false,
         statusCode: 200,
-        data: product
+        data: {
+          productName: product.productName,
+          model: product.model,
+          type: product.type,
+          quantity,
+          inStock
+        }
       }
     }
     return {

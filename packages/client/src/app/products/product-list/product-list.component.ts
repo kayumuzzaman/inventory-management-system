@@ -38,32 +38,20 @@ export class ProductListComponent implements OnInit {
     {
       key: 'name',
       label: 'Product name',
-      width: 30,
+      width: 40,
       alignment: Alignment.LEFT
     },
     {
       key: 'type',
       label: 'Type',
-      width: 20,
+      width: 30,
       alignment: Alignment.LEFT
     },
     {
       key: 'model',
       label: 'Model',
-      width: 20,
+      width: 30,
       alignment: Alignment.LEFT
-    },
-    {
-      key: 'quantity',
-      label: 'Quantity',
-      width: 15,
-      alignment: Alignment.LEFT
-    },
-    {
-      key: 'inStock',
-      label: 'In stock',
-      width: 15,
-      alignment: Alignment.RIGHT
     }
   ]
 
@@ -75,6 +63,10 @@ export class ProductListComponent implements OnInit {
 
   onClick = (id: string) => {
     this.router.navigate([`/products/details/${id}`])
+  }
+
+  onCreateButtonClick = () => {
+    this.showModal = !this.showModal
   }
 
   rows: IRows = {
@@ -89,9 +81,7 @@ export class ProductListComponent implements OnInit {
         id: row._id,
         name: row.productName,
         type: row.type,
-        model: row.model,
-        quantity: row.quantity,
-        inStock: row.inStock
+        model: row.model
       }
       rowValues.push(entry)
     })

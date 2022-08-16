@@ -7,12 +7,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       max: 100
     },
-    inStock: {
-      type: Number || null
-    },
-    quantity: {
-      type: Number || null
-    },
     model: {
       type: String || null
     },

@@ -1,10 +1,21 @@
 <!-- component -->
 
-<app-details-table [title]="title" [rows]="rows" [updateURL]="URL" [deleteURL]="URL" [onUpdate]="onUpdate"
-    [onDelete]="onDelete">
+<app-details-table
+  [title]="title"
+  [rows]="rows"
+  [updateURL]="URL"
+  [deleteURL]="URL"
+  [onUpdate]="onUpdate"
+  [onDelete]="onDelete"
+>
 </app-details-table>
 
-<app-product-edit [showModal]="showModal" [editMode]="true" [productId]="productId" (showModalEvent)="setModal($event)">
+<app-product-edit
+  [showModal]="showModal"
+  [editMode]="true"
+  [productId]="productId"
+  (showModalEvent)="setModal($event)"
+>
 </app-product-edit>
 
-<app-item-list [searchBy]="searchBy" [id]="productId"></app-item-list>
+<app-item-list [searchBy]="searchBy" [productId]="productId"></app-item-list>

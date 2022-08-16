@@ -44,7 +44,6 @@ export const deleteItems = async (req: any, res: any) => {
 
 export const deleteItemsByProductId = async (req: any, res: any) => {
   const { id } = req.params
-  console.log(id)
 
   const response = await deleteItemsByProductIdService(id)
   return res.status(response.statusCode).send(response)
