@@ -78,6 +78,7 @@ export const insertItemStatusService = async (data: any) => {
 export const updateItemStatusService = async (id: string, data: any) => {
   // TODO: do check if item is changed, then make the item status available in items collection
   try {
+    console.log(data)
     const oldItem = (await ItemStatus.find({ itemId: id }))[0]
 
     if (oldItem) {
