@@ -1,11 +1,12 @@
 <!-- component -->
-<app-item-edit
-  [showModal]="showModal"
-  [editMode]="false"
-  (showModalEvent)="setModal($event)"
-  [productId]="productId"
-></app-item-edit>
-
+<div *ngIf="searchText && searchBy">
+  <app-item-edit
+    [showModal]="showModal"
+    [editMode]="false"
+    (showModalEvent)="setModal($event)"
+    [productId]="searchText"
+  ></app-item-edit>
+</div>
 <app-list-table
   [title]="title"
   [columns]="columns"

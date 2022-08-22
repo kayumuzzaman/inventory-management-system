@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import {
   Alignment,
   IColumn,
@@ -29,15 +29,22 @@ export interface IItemData {
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  constructor(private itemService: ItemService, private router: Router) {}
+  constructor(
+    private itemService: ItemService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  @Input() searchBy: SearchBy
-  @Input() productId: string
+  @Input() searchBy?: string
+  @Input() searchText?: string
+
+  categoryFromURL: string
+  searchTextFromURL: string
 
   page: number = 1
   count: number = 0
   tableSize: number = 10
-  title: string = 'Items of this product'
+  title: string
   showModal: boolean = false
 
   columns: IColumn[] = [
@@ -50,20 +57,14 @@ export class ItemListComponent implements OnInit {
     {
       key: 'productName',
       label: 'Product',
-      width: 20,
+      width: 30,
       alignment: Alignment.LEFT
     },
     {
       key: 'createdAt',
       label: 'Stock In',
-      width: 20,
+      width: 30,
       alignment: Alignment.LEFT
-    },
-    {
-      key: 'isAvailable',
-      label: 'Is available',
-      width: 20,
-      alignment: Alignment.RIGHT
     }
   ]
 
@@ -100,10 +101,29 @@ export class ItemListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.itemService
-      .getItemsBySearch(this.searchBy, this.productId)
-      .subscribe((response) => {
-        this.rows = { ...this.rows, content: this.getRows(response?.data) }
-      })
+    this.categoryFromURL = this.route.snapshot.paramMap.get('category') || ''
+    this.searchTextFromURL =
+      this.route.snapshot.paramMap.get('searchText') || ''
+    if (this.searchBy && this.searchText) {
+      this.title = 'Items of this product'
+      this.itemService
+        .getItemsBySearch(this.searchBy, this.searchText)
+        .subscribe((response) => {
+          this.rows = { ...this.rows, content: this.getRows(response?.data) }
+        })
+    } else if (this.categoryFromURL && this.searchTextFromURL) {
+      if (this.categoryFromURL === SearchBy.EMPLOYEE_ID) {
+        this.title = 'Items of this employee'
+      } else if (this.categoryFromURL === SearchBy.ITEM_NAME) {
+        this.title = 'Items with this name'
+      } else if (this.categoryFromURL === SearchBy.SERIAL_NO) {
+        this.title = 'Item of this serial number'
+      }
+      this.itemService
+        .getItemsBySearch(this.categoryFromURL, this.searchTextFromURL)
+        .subscribe((response) => {
+          this.rows = { ...this.rows, content: this.getRows(response?.data) }
+        })
+    }
   }
 }

@@ -48,19 +48,19 @@ export class ItemHistoryListComponent implements OnInit {
     {
       key: 'receivedDate',
       label: 'Received date',
-      width: 15,
+      width: 20,
       alignment: Alignment.LEFT
     },
     {
       key: 'returnedDate',
       label: 'Returned date',
-      width: 15,
+      width: 20,
       alignment: Alignment.LEFT
     },
     {
       key: 'description',
       label: 'Description',
-      width: 50,
+      width: 40,
       alignment: Alignment.RIGHT
     }
   ]
@@ -79,8 +79,8 @@ export class ItemHistoryListComponent implements OnInit {
       const entry = {
         id: row._id,
         employeeName: row.employeeName,
-        receivedDate: row.receivedDate,
-        returnedDate: row.returnedDate,
+        receivedDate: new Date(row.receivedDate).toDateString(),
+        returnedDate: new Date(row.returnedDate).toDateString(),
         description: row.description
       }
       rowValues.push(entry)

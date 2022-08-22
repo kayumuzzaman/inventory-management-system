@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": true,
+    "eslint.codeActionsOnSave.rules": null,
+    "typescript.format.insertSpaceAfterTypeAssertion": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.indentHandlebars": true,
+    "editor.formatOnType": false
+}

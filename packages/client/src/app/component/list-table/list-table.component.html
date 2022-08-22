@@ -1,19 +1,10 @@
 <div>
-  <div
-    class="w-full flex lg:w-4/6 m-auto p-3 border-2 font-bold text-xl mb-1 mt-1 shadow-lg"
-  >
+  <div class="w-full flex lg:w-4/6 m-auto p-3 border-2 font-bold text-xl mb-1 mt-1 shadow-lg">
     <div class="text-lefts">
       {{ title }}
     </div>
-    <div
-      *ngIf="onButtonClick"
-      class="ml-auto"
-      data-modal-toggle="authentication-modal"
-    >
-      <button
-        class="bg-green-600 hover:bg-green-900 text-white font-bold py-2 px-4 rounded"
-        (click)="onButtonClick()"
-      >
+    <div *ngIf="onButtonClick" class="ml-auto" data-modal-toggle="authentication-modal">
+      <button class="bg-green-600 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" (click)="onButtonClick()">
         Create
       </button>
     </div>
@@ -24,29 +15,20 @@
         <div class="mb-6">
           <table class="w-full table-auto shadow-md rounded">
             <thead>
-              <tr
-                class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal w-full"
-              >
-                <th
-                  *ngFor="let column of columns"
-                  [ngStyle]="getWidth(column.width)"
-                >
-                  <div
-                    class="w-full py-3 px-6"
-                    [ngClass]="
+              <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal w-full">
+                <th *ngFor="let column of columns" [ngStyle]="getWidth(column.width)">
+                  <div class="w-full py-3 px-6" [ngClass]="
                       column.alignment == Alignment.LEFT
                         ? 'text-left'
                         : 'text-right'
-                    "
-                  >
+                    ">
                     {{ column.label }}
                   </div>
                 </th>
               </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
-              <tr
-                *ngFor="
+              <tr *ngFor="
                   let row of rows.content
                     | paginate
                       : {
@@ -55,21 +37,13 @@
                           totalItems: count
                         };
                   let i = index
-                "
-                class="border-b border-gray-200 hover:bg-gray-100"
-              >
-                <td
-                  *ngFor="let column of columns"
-                  class="py-3 px-6 cursor-pointer"
-                >
-                  <div
-                    [ngClass]="
+                " class="border-b border-gray-200 hover:bg-gray-100">
+                <td *ngFor="let column of columns" class="py-3 px-6 cursor-pointer">
+                  <div [ngClass]="
                       column.alignment == Alignment.LEFT
                         ? 'text-left'
                         : 'text-right'
-                    "
-                    (click)="rows.onClick && rows.onClick(row['id'].toString())"
-                  >
+                    " (click)="rows.onClick && rows.onClick(row['id'].toString())">
                     <span class="font-normal">
                       {{ row[column.key] }}
                     </span>
@@ -77,18 +51,22 @@
                 </td>
               </tr>
             </tbody>
+            <tbody *ngIf="rows.content.length === 0"> empty </tbody>
           </table>
         </div>
         <ng-container>
           <div class="flex justify-center">
-            <pagination-controls
-              previousLabel="Prev"
-              nextLabel="Next"
-              (pageChange)="page = $event"
-            >
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event">
             </pagination-controls>
           </div>
         </ng-container>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="rows.content.length === 0">
+    <div class="w-full flex lg:w-4/6 m-auto p-3 border-2 font-bold text-xl mb-1 mt-1 shadow-lg bg-red-200 rounded-md">
+      <div class="w-full text-center">
+        No result found !
       </div>
     </div>
   </div>

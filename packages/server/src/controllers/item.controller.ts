@@ -14,8 +14,9 @@ export const getAllItems = async (req: any, res: any) => {
 }
 
 export const getItemsBySearch = async (req: any, res: any) => {
-  const { searchBy, id } = req.params
-  const response = await getItemsBySearchService(searchBy, id)
+  const { searchBy, searchText } = req.params
+  const response = await getItemsBySearchService(searchBy, searchText)
+  console.log('search', response)
   return res.status(response.statusCode).send(response)
 }
 

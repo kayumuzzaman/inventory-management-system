@@ -1,11 +1,13 @@
 <nav class="px-2 border-b-2 border-gray-300 bg-white">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
-    <a [routerLink]="['products']" class="flex items-center">
-      <!-- <img src="" class="mr-3 h-6 sm:h-10" alt=""> -->
+    <a [routerLink]="['/products']" class="flex items-center">
       <span class="self-center text-xl font-semibold whitespace-nowrap"
         >IMS</span
       >
     </a>
+    <div class="invisible sm:visible">
+       <app-search></app-search>
+    </div>
     <button
       data-collapse-toggle="mobile-menu"
       type="button"
