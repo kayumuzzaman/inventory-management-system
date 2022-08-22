@@ -7,8 +7,8 @@ const itemStatusSchema = new mongoose.Schema(
     productId: ObjectId,
     employeeName: String || null,
     employeeId: String || null,
-    receivedDate: Date || null,
-    returnedDate: Date || null,
+    receivedDate: String || null,
+    returnedDate: String || null,
     description: String || null
   },
   { timestamps: true }

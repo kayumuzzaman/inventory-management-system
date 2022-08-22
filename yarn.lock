@@ -2393,6 +2393,11 @@
     node-addon-api "^3.2.1"
     node-gyp-build "^4.3.0"
 
+"@popperjs/core@^2.9.3":
+  version "2.11.6"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
+  integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
+
 "@schematics/angular@14.1.0":
   version "14.1.0"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-14.1.0.tgz#a1e2d2b27efa9d1a8177851f89695c5fe6f27d9d"
@@ -5636,6 +5641,21 @@ flatted@^3.1.0, flatted@^3.2.6:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.6.tgz#022e9218c637f9f3fc9c35ab9c9193f05add60b2"
   integrity "sha1-Ai6SGMY3+fP8nDWrnJGT8FrdYLI= sha512-0sQoMh9s0BYsm+12Huy/rkKxVu4R1+r96YX5cG44rHV0pQ6iC3Q+mkoMFaGWObMFYQxCVT+ssG1ksneA2MI9KQ=="
 
+flowbite-angular@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/flowbite-angular/-/flowbite-angular-0.0.1.tgz#b460ed96545ea6b5ca5ff861b5beabed07b7b818"
+  integrity sha512-DEzPnSxHuhjDyU4/DxlCJL2+n5P0ptR6YcdiBQBKkvCpx1vVZcjyESFnd+Se6XY8hbBELbaAtr/BxWFT+iqY9A==
+  dependencies:
+    tslib "^2.3.0"
+
+flowbite@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/flowbite/-/flowbite-1.5.2.tgz#c7a6f0320404544d977f794269f48ec34a4e2759"
+  integrity sha512-oSKhPkg0bYb4dZG4ypSh++dPrFM3IOSER6HOwJHYRFPW5u9PXL4AQFMQh7Kytgws2xrDQyl/zqefZmymeWt2IA==
+  dependencies:
+    "@popperjs/core" "^2.9.3"
+    mini-svg-data-uri "^1.4.3"
+
 follow-redirects@^1.0.0:
   version "1.15.1"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
@@ -7508,7 +7528,7 @@ mini-css-extract-plugin@2.6.1:
   dependencies:
     schema-utils "^4.0.0"
 
-mini-svg-data-uri@^1.2.3:
+mini-svg-data-uri@^1.2.3, mini-svg-data-uri@^1.4.3:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz#8ab0aabcdf8c29ad5693ca595af19dd2ead09939"
   integrity sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==

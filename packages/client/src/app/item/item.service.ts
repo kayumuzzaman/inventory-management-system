@@ -70,6 +70,16 @@ export class ItemService {
     )
   }
 
+  deleteItem(itemId: string) {
+    return this.http
+      .delete(`${environment.baseURL}/item/${itemId}`, this.httpOptions)
+      .pipe(
+        catchError((error) => {
+          return of({ error: error })
+        })
+      )
+  }
+
   deleteItemsByProductId(productId: string) {
     return this.http
       .delete(

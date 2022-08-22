@@ -28,7 +28,7 @@ export class ItemEditComponent implements OnInit {
 
     if (this.itemId && this.editMode) {
       this.itemService.getItemDetails(this.itemId).subscribe((response) => {
-        const item = response.data
+        const item = response.data.item
         this.form.patchValue(item)
       })
     }

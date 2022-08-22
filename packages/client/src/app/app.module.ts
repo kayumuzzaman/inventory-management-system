@@ -12,12 +12,13 @@ import { HttpClientModule } from '@angular/common/http'
 import { DetailsTableComponent } from './component/details-table/details-table.component'
 import { ListTableComponent } from './component/list-table/list-table.component'
 import { ProductEditComponent } from './products/product-edit/product-edit.component'
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ItemDetailsComponent } from './item/item-details/item-details.component'
 import { ItemListComponent } from './item/item-list/item-list.component'
 import { ItemHistoryListComponent } from './item-history/item-history-list/item-history-list.component'
 import { ItemEditComponent } from './item/item-edit/item-edit.component'
 import { ClickOutsideModule } from 'ng-click-outside'
+import { StatusEditComponent } from './item-status/status-edit/status-edit.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ClickOutsideModule } from 'ng-click-outside'
     ItemDetailsComponent,
     ItemListComponent,
     ItemHistoryListComponent,
-    ItemEditComponent
+    ItemEditComponent,
+    StatusEditComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { ClickOutsideModule } from 'ng-click-outside'
     NgxPaginationModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
