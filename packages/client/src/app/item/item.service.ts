@@ -7,9 +7,9 @@ import { Item } from './item.model'
 
 export enum SearchBy {
   PRODUCT_ID = 'product-id',
-  PRODUCT_NAME = 'product-name',
+  ITEM_NAME = 'item-name',
   EMPLOYEE_ID = 'employee-id',
-  TYPE = 'type'
+  SERIAL_NO = 'serial-no'
 }
 
 @Injectable({
@@ -58,8 +58,10 @@ export class ItemService {
     )
   }
 
-  getItemsBySearch(searchBy: SearchBy, id: string) {
-    return fromFetch(`${environment.baseURL}/item/${searchBy}/${id}`).pipe(
+  getItemsBySearch(searchBy: string, searchText: string) {
+    return fromFetch(
+      `${environment.baseURL}/item/${searchBy}/${searchText}`
+    ).pipe(
       switchMap((response) => {
         if (response.ok) {
           return response.json()

@@ -70,11 +70,15 @@ export class ItemDetailsComponent implements OnInit {
               ...this.statusDetails,
               {
                 key: 'Received date',
-                value: response.data.status.receivedDate
+                value: new Date(
+                  response.data.status.receivedDate
+                ).toDateString()
               },
               {
                 key: 'Returned date',
-                value: response.data.status.returnedDate
+                value: new Date(
+                  response.data.status.returnedDate
+                ).toDateString()
               },
               {
                 key: 'Description',
@@ -83,7 +87,6 @@ export class ItemDetailsComponent implements OnInit {
             ]
           }
         }
-        // return this.rows
       })
     }
   }

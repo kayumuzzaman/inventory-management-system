@@ -1,16 +1,10 @@
-<div
-  *ngIf="showModal"
-  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
->
+<div *ngIf="showModal"
+  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
   <div class="relative w-auto my-6 mx-auto">
     <!--content-->
-    <div
-      class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
-    >
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
       <!--header-->
-      <div
-        class="flex items-start justify-between p-3.5 border-b border-solid border-slate-200 rounded-t"
-      >
+      <div class="flex items-start justify-between p-3.5 border-b border-solid border-slate-200 rounded-t">
         <h3 class="text-2xl font-semibold">Update status</h3>
       </div>
       <!--body-->
@@ -24,45 +18,29 @@
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div class="form-group mb-6">
-                  <input
-                    type="text"
-                    formControlName="employeeName"
+                  <input type="text" formControlName="employeeName"
                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Employee name"
-                  />
-                  <div
-                    *ngIf="
+                    placeholder="Employee name" />
+                  <div *ngIf="
                       form.controls['employeeName'].invalid &&
                       (form.controls['employeeName'].dirty ||
                         form.controls['employeeName'].touched)
-                    "
-                    class="text-red-500"
-                  >
-                    <div
-                      *ngIf="form.controls['employeeName']?.errors?.['required']"
-                    >
+                    " class="text-red-500">
+                    <div *ngIf="form.controls['employeeName']?.errors?.['required']">
                       Employee name is required.
                     </div>
                   </div>
                 </div>
                 <div class="form-group mb-6">
-                  <input
-                    type="text"
-                    formControlName="employeeId"
+                  <input type="text" formControlName="employeeId"
                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Employee ID"
-                  />
-                  <div
-                    *ngIf="
+                    placeholder="Employee ID" />
+                  <div *ngIf="
                       form.controls['employeeId'].invalid &&
                       (form.controls['employeeId'].dirty ||
                         form.controls['employeeId'].touched)
-                    "
-                    class="text-red-500"
-                  >
-                    <div
-                      *ngIf="form.controls['employeeId']?.errors?.['required']"
-                    >
+                    " class="text-red-500">
+                    <div *ngIf="form.controls['employeeId']?.errors?.['required']">
                       Employee ID is required.
                     </div>
                   </div>
@@ -74,45 +52,29 @@
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div class="form-group mb-6">
-                  <input
-                    type="text"
-                    formControlName="receivedDate"
+                  <input type="date" formControlName="receivedDate"
                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Received date"
-                  />
-                  <div
-                    *ngIf="
+                    placeholder="Received date" />
+                  <div *ngIf="
                       form.controls['receivedDate'].invalid &&
                       (form.controls['receivedDate'].dirty ||
                         form.controls['receivedDate'].touched)
-                    "
-                    class="text-red-500"
-                  >
-                    <div
-                      *ngIf="form.controls['receivedDate']?.errors?.['required']"
-                    >
+                    " class="text-red-500">
+                    <div *ngIf="form.controls['receivedDate']?.errors?.['required']">
                       Received date is required.
                     </div>
                   </div>
                 </div>
                 <div class="form-group mb-6">
-                  <input
-                    type="text"
-                    formControlName="returnedDate"
+                  <input type="date" formControlName="returnedDate"
                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Returned date"
-                  />
-                  <div
-                    *ngIf="
+                    placeholder="Returned date" />
+                  <div *ngIf="
                       form.controls['returnedDate'].invalid &&
                       (form.controls['returnedDate'].dirty ||
                         form.controls['returnedDate'].touched)
-                    "
-                    class="text-red-500"
-                  >
-                    <div
-                      *ngIf="form.controls['returnedDate']?.errors?.['required']"
-                    >
+                    " class="text-red-500">
+                    <div *ngIf="form.controls['returnedDate']?.errors?.['required']">
                       Returned date is required.
                     </div>
                   </div>
@@ -120,23 +82,15 @@
               </div>
               <label for="description" class="pb-2">Description</label>
               <div class="form-group mb-6">
-                <textarea
-                  type="textarea"
-                  formControlName="description"
+                <textarea type="textarea" formControlName="description"
                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Description"
-                ></textarea>
-                <div
-                  *ngIf="
+                  placeholder="Description"></textarea>
+                <div *ngIf="
                     form.controls['description'].invalid &&
                     (form.controls['description'].dirty ||
                       form.controls['description'].touched)
-                  "
-                  class="text-red-500"
-                >
-                  <div
-                    *ngIf="form.controls['description']?.errors?.['required']"
-                  >
+                  " class="text-red-500">
+                  <div *ngIf="form.controls['description']?.errors?.['required']">
                     description is required.
                   </div>
                 </div>
@@ -146,23 +100,16 @@
         </div>
       </div>
       <!--footer-->
-      <div
-        class="flex items-center justify-end p-2 border-t border-solid border-slate-200 rounded-b"
-      >
+      <div class="flex items-center justify-end p-2 border-t border-solid border-slate-200 rounded-b">
         <button
           class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          (click)="toggleModal()"
-        >
+          type="button" (click)="toggleModal()">
           Close
         </button>
         <button
           class="bg-green-600 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="submit"
-          form="ngForm"
-          [disabled]="form.invalid"
-          [ngClass]="{ 'bg-green-900': form.invalid }"
-        >
+          type="submit" form="ngForm" [disabled]="form.invalid"
+          [ngClass]=" form.invalid ? 'bg-green-900 cursor-not-allowed' : 'cursor-pointer'">
           Save
         </button>
       </div>
