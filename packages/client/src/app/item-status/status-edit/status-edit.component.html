@@ -13,26 +13,12 @@
           <form [formGroup]="form" (ngSubmit)="onSubmit()" id="ngForm">
             <div class="flex flex-col">
               <div class="grid grid-cols-2 gap-4">
-                <label for="employeeName" class="pb-2">Employee name*</label>
-                <label for="employeeId" class="pb-2">Employee ID*</label>
+                <label for="employeeName" class="pb-2">Employee ID*</label>
+                <label for="employeeId" class="pb-2">Employee name</label>
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div class="form-group mb-6">
-                  <input type="text" formControlName="employeeName"
-                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Employee name" />
-                  <div *ngIf="
-                      form.controls['employeeName'].invalid &&
-                      (form.controls['employeeName'].dirty ||
-                        form.controls['employeeName'].touched)
-                    " class="text-red-500">
-                    <div *ngIf="form.controls['employeeName']?.errors?.['required']">
-                      Employee name is required.
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group mb-6">
-                  <input type="text" formControlName="employeeId"
+                  <input type="text" formControlName="employeeId" (ngModelChange)="onChangeEmployeeId($event)"
                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Employee ID" />
                   <div *ngIf="
@@ -44,6 +30,11 @@
                       Employee ID is required.
                     </div>
                   </div>
+                </div>
+                <div class="form-group mb-6">
+                  <input type="text" formControlName="employeeName" readonly
+                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Employee name" />
                 </div>
               </div>
               <div class="grid grid-cols-2 gap-4">

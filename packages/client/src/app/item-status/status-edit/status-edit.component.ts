@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
+import { EmployeeService } from '../employee.service'
 import { Status } from '../status.model'
 import { StatusService } from '../status.service'
 
@@ -16,10 +17,12 @@ export class StatusEditComponent implements OnInit {
   @Input() productId: string
 
   itemId: string
+  employeeIdToName: { [key: string]: string } = {}
 
   form: FormGroup
   constructor(
     private statusService: StatusService,
+    private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -33,11 +36,27 @@ export class StatusEditComponent implements OnInit {
       returnedDate: new FormControl(null, Validators.required),
       description: new FormControl(null)
     })
+
+    this.employeeService.getEmployeeList().subscribe((response: any) => {
+      let employeelist = response || []
+      if (employeelist.length > 0) {
+        employeelist = employeelist.forEach((employee: any) => {
+          if (employee.id) {
+            const id: string = employee.id
+            this.employeeIdToName[id] = employee.name
+          }
+        })
+      }
+    })
   }
 
   toggleModal() {
     this.showModal = !this.showModal
     this.showModalEvent.emit(this.showModal)
+  }
+
+  onChangeEmployeeId = (id: string) => {
+    this.form.controls['employeeName'].setValue(this.employeeIdToName[id])
   }
 
   onSubmit() {
@@ -69,7 +88,7 @@ export class StatusEditComponent implements OnInit {
       }
     }
 
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
       this.router.navigate([currentUrl])
     })
 
