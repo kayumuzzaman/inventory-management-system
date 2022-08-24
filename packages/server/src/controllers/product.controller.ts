@@ -1,3 +1,4 @@
+import { verifyToken } from '../services/auth.service'
 import {
   deleteProductService,
   getAllProductService,
@@ -7,8 +8,11 @@ import {
 } from '../services/product.service'
 
 export const getAllProducts = async (req: any, res: any) => {
+  // if (verifyToken(req)) {
   const response = await getAllProductService()
   return res.status(response.statusCode).send(response)
+  // }
+  // return res.status(401).send('Invalid token')
 }
 
 export const getProductDetails = async (req: any, res: any) => {
