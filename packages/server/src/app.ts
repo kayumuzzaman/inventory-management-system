@@ -6,6 +6,7 @@ import itemRouter from './routes/item.route'
 import connectMongo from './configs/db.config'
 import itemStatusRouter from './routes/item-status.route'
 import itemStatusHistoryRouter from './routes/item-status-history.route'
+import authRoutes from './routes/auth.route'
 import dotenv from 'dotenv'
 import path from 'path'
 import cors from 'cors'
@@ -26,6 +27,7 @@ app.use('/product', productRouter)
 app.use('/item', itemRouter)
 app.use('/item-status', itemStatusRouter)
 app.use('/item-status-history', itemStatusHistoryRouter)
+app.use('/auth', authRoutes)
 
 // error handler
 app.use(function (err: any, req: any, res: any, next: any) {
