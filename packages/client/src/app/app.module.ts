@@ -20,6 +20,7 @@ import { ItemEditComponent } from './item/item-edit/item-edit.component'
 import { ClickOutsideModule } from 'ng-click-outside'
 import { StatusEditComponent } from './item-status/status-edit/status-edit.component'
 import { SearchComponent } from './header/search/search.component'
+import { LoginComponent } from './login/login.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SearchComponent } from './header/search/search.component'
     ItemHistoryListComponent,
     ItemEditComponent,
     StatusEditComponent,
-    SearchComponent
+    SearchComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
