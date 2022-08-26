@@ -1,34 +1,17 @@
+<app-header></app-header>
+
 <!-- item details -->
-<app-details-table
-  [title]="detailsTitle"
-  [rows]="itemDetails"
-  [updateURL]="URL"
-  [deleteURL]="URL"
-  [onDelete]="onDelete"
-  [onUpdate]="onDetailsUpdate"
-></app-details-table>
+<app-details-table [title]="detailsTitle" [rows]="itemDetails" [updateURL]="URL" [deleteURL]="URL" [onDelete]="onDelete"
+  [onUpdate]="onDetailsUpdate"></app-details-table>
 <!-- item status details -->
-<app-details-table
-  [title]="statusTitle"
-  [rows]="statusDetails"
-  [noMargin]="true"
-  [updateURL]="URL"
-  [onUpdate]="onStatusUpdate"
-></app-details-table>
+<app-details-table [title]="statusTitle" [rows]="statusDetails" [noMargin]="true" [updateURL]="URL"
+  [onUpdate]="onStatusUpdate"></app-details-table>
 <!-- details modal -->
-<app-item-edit
-  [showModal]="showDetailsModal"
-  [editMode]="true"
-  [productId]="productId"
-  (showModalEvent)="setDetailsModal($event)"
-></app-item-edit>
+<app-item-edit [showModal]="showDetailsModal" [editMode]="true" [productId]="productId"
+  (showModalEvent)="setDetailsModal($event)"></app-item-edit>
 <!-- status modal -->
-<app-status-edit
-  [showModal]="showStatusModal"
-  [editMode]="statusEditMode"
-  [productId]="productId"
-  (showModalEvent)="setStatusModal($event)"
->
+<app-status-edit [showModal]="showStatusModal" [editMode]="statusEditMode" [productId]="productId"
+  (showModalEvent)="setStatusModal($event)">
 </app-status-edit>
 <!-- history list -->
 <app-item-history-list [itemId]="itemId"></app-item-history-list>

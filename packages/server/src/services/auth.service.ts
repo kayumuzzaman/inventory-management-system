@@ -69,7 +69,7 @@ export const loginService = async (req: any) => {
     if (!(email && password)) {
       return {
         statusCode: 400,
-        error: 'All input is required'
+        message: 'All input is required'
       }
     }
     // Validate if user exist in our database
@@ -87,13 +87,12 @@ export const loginService = async (req: any) => {
 
       return {
         statusCode: 200,
-        data: user,
         token
       }
     }
     return {
       statusCode: 400,
-      error: 'Invalid credentials'
+      message: 'Invalid credentials'
     }
   } catch (error) {
     return {
