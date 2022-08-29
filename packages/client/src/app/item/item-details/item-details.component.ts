@@ -1,3 +1,5 @@
+/* global localStorage */
+
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Route, Router } from '@angular/router'
 import { IRowDetails } from 'src/app/component/details-table/details-table.component'
@@ -29,65 +31,67 @@ export class ItemDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.itemId = this.route.snapshot.paramMap.get('itemId') || ''
     if (this.itemId) {
-      this.itemService.getItemDetails(this.itemId).subscribe((response) => {
-        this.productId = response.data.item.productId
-        this.itemDetails = [
-          {
-            key: 'Item name',
-            value: response.data.item.itemName
-          },
-          {
-            key: 'Product',
-            value: response.data.item.productName
-          },
-          {
-            key: 'Serial number',
-            value: response.data.item.serialNo
-          },
-          {
-            key: 'Created at',
-            value: new Date(response.data.item.createdAt).toDateString()
-          },
-          {
-            key: 'Details',
-            value: response.data.item.description
-          },
-          {
-            key: 'Availability',
-            value: !response.data.status?.employeeId ? 'Yes' : 'No'
-          }
-        ]
-        if (response.data.status) {
-          this.statusEditMode = true
-          this.statusDetails = [
+      this.itemService
+        .getItemDetails(this.itemId)
+        .subscribe((response: any) => {
+          this.productId = response.data.item.productId
+          this.itemDetails = [
             {
-              key: 'Employee name',
-              value: response.data.status.employeeName
+              key: 'Item name',
+              value: response.data.item.itemName
+            },
+            {
+              key: 'Product',
+              value: response.data.item.productName
+            },
+            {
+              key: 'Serial number',
+              value: response.data.item.serialNo
+            },
+            {
+              key: 'Created at',
+              value: new Date(response.data.item.createdAt).toDateString()
+            },
+            {
+              key: 'Details',
+              value: response.data.item.description
+            },
+            {
+              key: 'Availability',
+              value: !response.data.status?.employeeId ? 'Yes' : 'No'
             }
           ]
-          if (response.data.status.employeeName) {
+          if (response.data.status) {
+            this.statusEditMode = true
             this.statusDetails = [
-              ...this.statusDetails,
               {
-                key: 'Received date',
-                value: new Date(
-                  response.data.status.receivedDate
-                ).toDateString()
-              },
-              {
-                key: 'Returned date',
-                value: new Date(
-                  response.data.status.returnedDate
-                ).toDateString()
-              },
-              {
-                key: 'Description',
-                value: response.data.status.description
+                key: 'Employee name',
+                value: response.data.status.employeeName
               }
             ]
+            if (response.data.status.employeeName) {
+              this.statusDetails = [
+                ...this.statusDetails,
+                {
+                  key: 'Received date',
+                  value: new Date(
+                    response.data.status.receivedDate
+                  ).toDateString()
+                },
+                {
+                  key: 'Returned date',
+                  value: new Date(
+                    response.data.status.returnedDate
+                  ).toDateString()
+                },
+                {
+                  key: 'Description',
+                  value: response.data.status.description
+                }
+              ]
+            }
           }
-        }
-      })
+        })
     }
   }
 
@@ -113,5 +117,10 @@ export class ItemDetailsComponent implements OnInit {
       this.itemService.deleteItem(this.itemId).subscribe()
       this.router.navigate([`/products/details/${this.productId}`])
     }
+  }
+
+  onUpdate = () => {
+    const currentUrl = this.router.url
+    this.router.navigateByUrl(currentUrl)
   }
 }

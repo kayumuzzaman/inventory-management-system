@@ -21,6 +21,7 @@ import { ClickOutsideModule } from 'ng-click-outside'
 import { StatusEditComponent } from './item-status/status-edit/status-edit.component'
 import { SearchComponent } from './header/search/search.component'
 import { LoginComponent } from './login/login.component'
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt'
 
 @NgModule({
   declarations: [
@@ -49,7 +50,10 @@ import { LoginComponent } from './login/login.component'
     ClickOutsideModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

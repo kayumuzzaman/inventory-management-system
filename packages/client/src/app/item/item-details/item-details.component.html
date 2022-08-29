@@ -7,10 +7,10 @@
 <app-details-table [title]="statusTitle" [rows]="statusDetails" [noMargin]="true" [updateURL]="URL"
   [onUpdate]="onStatusUpdate"></app-details-table>
 <!-- details modal -->
-<app-item-edit [showModal]="showDetailsModal" [editMode]="true" [productId]="productId"
+<app-item-edit [showModal]="showDetailsModal" [editMode]="true" [productId]="productId" [onUpdate]="onUpdate"
   (showModalEvent)="setDetailsModal($event)"></app-item-edit>
 <!-- status modal -->
-<app-status-edit [showModal]="showStatusModal" [editMode]="statusEditMode" [productId]="productId"
+<app-status-edit [showModal]="showStatusModal" [editMode]="statusEditMode" [productId]="productId" [onUpdate]="onUpdate"
   (showModalEvent)="setStatusModal($event)">
 </app-status-edit>
 <!-- history list -->

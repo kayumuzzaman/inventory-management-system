@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { environment } from 'src/environments/environment'
-import { catchError, map, of } from 'rxjs'
+import { catchError, of } from 'rxjs'
 import { ajax } from 'rxjs/ajax'
 
 interface Credentials {

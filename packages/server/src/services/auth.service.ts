@@ -3,8 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 export const verifyToken = (req: any) => {
-  const token =
-    req.body.token || req.query.token || req.headers['x-access-token']
+  const token = req.headers['x-access-token']
 
   if (!token) {
     return false
@@ -81,7 +80,7 @@ export const loginService = async (req: any) => {
         { user_id: user._id, email, userType: user.userType },
         `${process.env.TOKENT_KEY}`,
         {
-          expiresIn: '2h'
+          expiresIn: '1h'
         }
       )
 

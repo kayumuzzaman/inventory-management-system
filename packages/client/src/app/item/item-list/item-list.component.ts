@@ -77,8 +77,7 @@ export class ItemListComponent implements OnInit {
   }
 
   rows: IRows = {
-    onClick: this.onClick,
-    content: []
+    onClick: this.onClick
   }
 
   setModal(event: boolean) {
@@ -108,7 +107,7 @@ export class ItemListComponent implements OnInit {
       this.title = 'Items of this product'
       this.itemService
         .getItemsBySearch(this.searchBy, this.searchText)
-        .subscribe((response) => {
+        .subscribe((response: any) => {
           this.rows = { ...this.rows, content: this.getRows(response?.data) }
         })
     } else if (this.categoryFromURL && this.searchTextFromURL) {
@@ -121,7 +120,7 @@ export class ItemListComponent implements OnInit {
       }
       this.itemService
         .getItemsBySearch(this.categoryFromURL, this.searchTextFromURL)
-        .subscribe((response) => {
+        .subscribe((response: any) => {
           this.rows = { ...this.rows, content: this.getRows(response?.data) }
         })
     }

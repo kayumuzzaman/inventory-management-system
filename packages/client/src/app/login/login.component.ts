@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { LoginService } from './login.service'
+import * as moment from 'moment'
+import jwt_decode from 'jwt-decode'
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,6 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup
   error: string
-  token: string
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -24,9 +25,15 @@ export class LoginComponent implements OnInit {
   setResponse = (res: any) => {
     if (res.status === 400) {
       this.error = res.response.message
-    } else if (res.status === 200) {
-      this.token = res.response.token
-      this.error = ''
+    } else {
+      const token = res.response.token
+      const info: any = jwt_decode(token)
+      const scope = info.userType
+
+      /* eslint-disable no-undef */
+      localStorage.setItem('token', token)
+      localStorage.setItem('scope', scope)
+
       this.router.navigate(['/'])
     }
   }
@@ -44,3 +51,7 @@ export class LoginComponent implements OnInit {
     }
   }
 }
+
+/*
+2280831003
+*/
