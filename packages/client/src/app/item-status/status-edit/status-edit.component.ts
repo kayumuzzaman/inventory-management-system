@@ -15,6 +15,7 @@ export class StatusEditComponent implements OnInit {
   @Output() showModalEvent: EventEmitter<boolean> = new EventEmitter()
   @Input() editMode!: boolean
   @Input() productId: string
+  @Input() onUpdate: () => void
 
   itemId: string
   employeeIdToName: { [key: string]: string } = {}
@@ -88,9 +89,7 @@ export class StatusEditComponent implements OnInit {
       }
     }
 
-    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
-      this.router.navigate([currentUrl])
-    })
+    this.onUpdate()
 
     this.toggleModal()
   }

@@ -1,23 +1,30 @@
+/* global localStorage */
+
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { of, switchMap } from 'rxjs'
-import { fromFetch } from 'rxjs/fetch'
+import { catchError, of } from 'rxjs'
 import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemHistoryService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('token') || ''
+    })
+  }
 
   getHistoryList(id: string) {
-    return fromFetch(`${environment.baseURL}/item-status-history/${id}`).pipe(
-      switchMap((response) => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          return of({ error: true })
-        }
-      })
-    )
+    return this.http
+      .get(`${environment.baseURL}/item-status-history/${id}`, this.httpOptions)
+      .pipe(
+        catchError((error) => {
+          return of({ error: error })
+        })
+      )
   }
 }

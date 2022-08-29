@@ -9,7 +9,7 @@
       </button>
     </div>
   </div>
-  <div class="overflow-x-auto" *ngIf="rows.content.length > 0">
+  <div class="overflow-x-auto" *ngIf="rows.content && rows.content.length > 0">
     <div class="flex justify-center bg-white font-sans">
       <div class="w-full lg:w-4/6">
         <div class="mb-6">
@@ -29,7 +29,7 @@
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
               <tr *ngFor="
-                  let row of rows.content
+                  let row of rows.content.reverse()
                     | paginate
                       : {
                           itemsPerPage: tableSize,
@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="rows.content.length === 0">
+  <div *ngIf="rows.content && rows.content.length === 0">
     <div class="w-full flex lg:w-4/6 m-auto p-3 border-2 font-bold text-xl mb-1 mt-1 shadow-lg bg-red-200 rounded-md">
       <div class="w-full text-center">
         No result found !

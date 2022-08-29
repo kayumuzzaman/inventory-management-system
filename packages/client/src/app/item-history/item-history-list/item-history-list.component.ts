@@ -69,9 +69,7 @@ export class ItemHistoryListComponent implements OnInit {
     this.router.navigate([`/items/details/${id}`])
   }
 
-  rows: IRows = {
-    content: []
-  }
+  rows: IRows = {}
 
   getRows = (rows: IItemHistoryData[]) => {
     let rowValues: IRowContent[] = []
@@ -89,8 +87,10 @@ export class ItemHistoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.historyService.getHistoryList(this.itemId).subscribe((response) => {
-      this.rows = { ...this.rows, content: this.getRows(response?.data) }
-    })
+    this.historyService
+      .getHistoryList(this.itemId)
+      .subscribe((response: any) => {
+        this.rows = { ...this.rows, content: this.getRows(response?.data) }
+      })
   }
 }

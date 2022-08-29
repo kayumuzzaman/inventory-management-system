@@ -14,6 +14,7 @@ export class ItemEditComponent implements OnInit {
   @Output() showModalEvent: EventEmitter<boolean> = new EventEmitter()
   @Input() editMode!: boolean
   @Input() productId: string
+  @Input() onUpdate: () => void
 
   itemId!: string | null
 
@@ -27,10 +28,12 @@ export class ItemEditComponent implements OnInit {
     this.itemId = this.route.snapshot.paramMap.get('itemId')
 
     if (this.itemId && this.editMode) {
-      this.itemService.getItemDetails(this.itemId).subscribe((response) => {
-        const item = response.data.item
-        this.form.patchValue(item)
-      })
+      this.itemService
+        .getItemDetails(this.itemId)
+        .subscribe((response: any) => {
+          const item = response.data.item
+          this.form.patchValue(item)
+        })
     }
     this.form = new FormGroup({
       itemName: new FormControl(null, Validators.required),
@@ -62,9 +65,7 @@ export class ItemEditComponent implements OnInit {
       }
     }
 
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl])
-    })
+    this.onUpdate()
 
     this.toggleModal()
   }

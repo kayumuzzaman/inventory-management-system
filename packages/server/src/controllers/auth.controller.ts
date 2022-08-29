@@ -1,12 +1,16 @@
 import {
   loginService,
   logoutService,
-  registerService
+  registerService,
+  verifyToken
 } from '../services/auth.service'
 
 export const userRegister = async (req: any, res: any) => {
-  const response = await registerService(req)
-  return res.status(response.statusCode).send(response)
+  if (verifyToken(req)) {
+    const response = await registerService(req)
+    return res.status(response.statusCode).send(response)
+  }
+  return res.status(401).send('Invalid token')
 }
 
 export const userLogin = async (req: any, res: any) => {

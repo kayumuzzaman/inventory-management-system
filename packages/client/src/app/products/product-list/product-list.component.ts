@@ -2,13 +2,13 @@
 
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
+import { JwtHelperService } from '@auth0/angular-jwt'
 import {
   Alignment,
   IColumn,
   IRowContent,
   IRows
 } from 'src/app/component/list-table/list-table.component'
-import { Product } from '../product.model'
 import { ProductService } from '../product.service'
 
 interface IProductData {
@@ -27,7 +27,11 @@ interface IProductData {
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private jwtHelper: JwtHelperService
+  ) {}
 
   page: number = 1
   count: number = 0
@@ -57,7 +61,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((response) => {
-      this.rows = { ...this.rows, content: this.getRows(response?.data) }
+      this.rows = { ...this.rows, content: this.getRows(response) }
     })
   }
 
@@ -70,11 +74,14 @@ export class ProductListComponent implements OnInit {
   }
 
   rows: IRows = {
-    onClick: this.onClick,
-    content: []
+    onClick: this.onClick
   }
 
-  getRows = (rows: IProductData[]) => {
+  getRows = (response: any) => {
+    let rows: IProductData[] = []
+    if (response?.data && response?.data.length > 0) {
+      rows = response.data
+    }
     let rowValues: IRowContent[] = []
     rows.forEach((row) => {
       const entry = {

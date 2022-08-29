@@ -1,3 +1,4 @@
+/* global localStorage */
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { catchError, of, switchMap } from 'rxjs'
@@ -13,32 +14,29 @@ export class ProductService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('token') || ''
     })
   }
 
   getAllProducts() {
-    return fromFetch(`${environment.baseURL}/product/`).pipe(
-      switchMap((response) => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          return of({ error: true })
-        }
-      })
-    )
+    return this.http
+      .get(`${environment.baseURL}/product/`, this.httpOptions)
+      .pipe(
+        catchError((error) => {
+          return of({ error: error })
+        })
+      )
   }
 
   getProductDetails(id: string) {
-    return fromFetch(`${environment.baseURL}/product/${id}`).pipe(
-      switchMap((response) => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          return of({ error: true })
-        }
-      })
-    )
+    return this.http
+      .get(`${environment.baseURL}/product/${id}`, this.httpOptions)
+      .pipe(
+        catchError((error) => {
+          return of({ error: error })
+        })
+      )
   }
 
   createProduct(product: Product) {

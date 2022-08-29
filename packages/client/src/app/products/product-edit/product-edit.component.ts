@@ -28,7 +28,7 @@ export class ProductEditComponent implements OnInit {
     if (this.productId) {
       this.productService
         .getProductDetails(this.productId)
-        .subscribe((response) => {
+        .subscribe((response: any) => {
           const product = response.data
           this.form.patchValue(product)
         })
@@ -66,9 +66,7 @@ export class ProductEditComponent implements OnInit {
       }
     }
 
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl])
-    })
+    this.router.navigateByUrl(currentUrl)
 
     this.toggleModal()
   }

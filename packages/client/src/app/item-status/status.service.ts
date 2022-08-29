@@ -1,3 +1,5 @@
+/* global localStorage */
+
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { catchError, of } from 'rxjs'
@@ -12,7 +14,8 @@ export class StatusService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('token') || ''
     })
   }
 

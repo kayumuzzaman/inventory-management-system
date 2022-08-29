@@ -13,7 +13,7 @@ export interface IRowContent {
 
 export interface IRows {
   onClick?: (id: string) => void
-  content: IRowContent[]
+  content?: IRowContent[]
 }
 
 export enum Alignment {

@@ -3,8 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 export const verifyToken = (req: any) => {
-  const token =
-    req.body.token || req.query.token || req.headers['x-access-token']
+  const token = req.headers['x-access-token']
 
   if (!token) {
     return false
@@ -69,7 +68,7 @@ export const loginService = async (req: any) => {
     if (!(email && password)) {
       return {
         statusCode: 400,
-        error: 'All input is required'
+        message: 'All input is required'
       }
     }
     // Validate if user exist in our database
@@ -81,19 +80,18 @@ export const loginService = async (req: any) => {
         { user_id: user._id, email, userType: user.userType },
         `${process.env.TOKENT_KEY}`,
         {
-          expiresIn: '2h'
+          expiresIn: '1h'
         }
       )
 
       return {
         statusCode: 200,
-        data: user,
         token
       }
     }
     return {
       statusCode: 400,
-      error: 'Invalid credentials'
+      message: 'Invalid credentials'
     }
   } catch (error) {
     return {
