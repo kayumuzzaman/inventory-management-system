@@ -2,7 +2,6 @@
 
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { JwtHelperService } from '@auth0/angular-jwt'
 import { IRowDetails } from 'src/app/component/details-table/details-table.component'
 import { ItemService, SearchBy } from 'src/app/item/item.service'
 import { environment } from 'src/environments/environment'
@@ -25,11 +24,10 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private itemService: ItemService,
     private route: ActivatedRoute,
-    private router: Router,
-    private jwtHelper: JwtHelperService
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
+  getProductDetails = () => {
     this.productId = this.route.snapshot.paramMap.get('id') || ''
     if (this.productId) {
       this.productService
@@ -60,6 +58,10 @@ export class ProductDetailsComponent implements OnInit {
           return this.rows
         })
     }
+  }
+
+  ngOnInit(): void {
+    this.getProductDetails()
   }
 
   setModal(event: boolean) {

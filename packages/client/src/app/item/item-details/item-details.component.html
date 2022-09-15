@@ -5,13 +5,13 @@
   [onUpdate]="onDetailsUpdate"></app-details-table>
 <!-- item status details -->
 <app-details-table [title]="statusTitle" [rows]="statusDetails" [noMargin]="true" [updateURL]="URL"
-  [onUpdate]="onStatusUpdate"></app-details-table>
+  [onUpdate]="onUpdateStatusModel"></app-details-table>
 <!-- details modal -->
-<app-item-edit [showModal]="showDetailsModal" [editMode]="true" [productId]="productId" [onUpdate]="onUpdate"
+<app-item-edit [showModal]="showDetailsModal" [editMode]="true" [productId]="productId" [onUpdate]="onUpdateDetails"
   (showModalEvent)="setDetailsModal($event)"></app-item-edit>
 <!-- status modal -->
-<app-status-edit [showModal]="showStatusModal" [editMode]="statusEditMode" [productId]="productId" [onUpdate]="onUpdate"
-  (showModalEvent)="setStatusModal($event)">
+<app-status-edit [showModal]="showStatusModal" [editMode]="statusEditMode" [productId]="productId"
+  [onUpdate]="onUpdateStatus" (showModalEvent)=" setStatusModal($event)">
 </app-status-edit>
 <!-- history list -->
-<app-item-history-list [itemId]="itemId"></app-item-history-list>
+<app-item-history-list [fetchAgain]="statusUpdated" [itemId]="itemId"></app-item-history-list>

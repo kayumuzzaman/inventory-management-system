@@ -2,7 +2,6 @@
 
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { JwtHelperService } from '@auth0/angular-jwt'
 import {
   Alignment,
   IColumn,
@@ -27,11 +26,7 @@ interface IProductData {
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  constructor(
-    private productService: ProductService,
-    private router: Router,
-    private jwtHelper: JwtHelperService
-  ) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   page: number = 1
   count: number = 0
@@ -59,10 +54,14 @@ export class ProductListComponent implements OnInit {
     }
   ]
 
-  ngOnInit(): void {
+  getProductList = () => {
     this.productService.getAllProducts().subscribe((response) => {
       this.rows = { ...this.rows, content: this.getRows(response) }
     })
+  }
+
+  ngOnInit(): void {
+    this.getProductList()
   }
 
   onClick = (id: string) => {

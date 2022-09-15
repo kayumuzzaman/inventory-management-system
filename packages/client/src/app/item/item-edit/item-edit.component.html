@@ -1,14 +1,8 @@
-<div
-  *ngIf="showModal"
-  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
->
+<div *ngIf="showModal"
+  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
   <div class="relative my-6 mx-auto max-w-6xl sm:w-6/12">
-    <div
-      class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
-    >
-      <div
-        class="flex items-start justify-between p-6 border-b border-solid border-slate-200 rounded-t"
-      >
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+      <div class="flex items-start justify-between p-6 border-b border-solid border-slate-200 rounded-t">
         <h3 *ngIf="!editMode" class="text-2xl font-semibold">
           Add Item for this product
         </h3>
@@ -20,20 +14,14 @@
             <div class="flex flex-col">
               <label for="itemName" class="pb-2">Item Name*</label>
               <div class="form-group mb-6">
-                <input
-                  type="text"
-                  formControlName="itemName"
+                <input type="text" formControlName="itemName"
                   class="form-control block w-full px-5 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Product name"
-                />
-                <div
-                  *ngIf="
+                  placeholder="Product name" />
+                <div *ngIf="
                     form.controls['itemName'].invalid &&
                     (form.controls['itemName'].dirty ||
                       form.controls['itemName'].touched)
-                  "
-                  class="text-red-500"
-                >
+                  " class="text-red-500">
                   <div *ngIf="form.controls['itemName']?.errors?.['required']">
                     Product name is required.
                   </div>
@@ -42,20 +30,14 @@
 
               <label for="serialNo" class="pb-2">Item serial number</label>
               <div class="form-group mb-6">
-                <input
-                  type="text"
-                  formControlName="serialNo"
+                <input type="text" formControlName="serialNo"
                   class="form-control block w-full px-5 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Product name"
-                />
-                <div
-                  *ngIf="
+                  placeholder="Product name" />
+                <div *ngIf="
                     form.controls['serialNo'].invalid &&
                     (form.controls['serialNo'].dirty ||
                       form.controls['serialNo'].touched)
-                  "
-                  class="text-red-500"
-                >
+                  " class="text-red-500">
                   <div *ngIf="form.controls['serialNo']?.errors?.['required']">
                     Serial No is required.
                   </div>
@@ -64,23 +46,15 @@
 
               <label for="description" class="pb-2">Description</label>
               <div class="form-group mb-6">
-                <textarea
-                  type="textarea"
-                  formControlName="description"
+                <textarea type="textarea" formControlName="description"
                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Description"
-                ></textarea>
-                <div
-                  *ngIf="
+                  placeholder="Description"></textarea>
+                <div *ngIf="
                     form.controls['description'].invalid &&
                     (form.controls['description'].dirty ||
                       form.controls['description'].touched)
-                  "
-                  class="text-red-500"
-                >
-                  <div
-                    *ngIf="form.controls['description']?.errors?.['required']"
-                  >
+                  " class="text-red-500">
+                  <div *ngIf="form.controls['description']?.errors?.['required']">
                     Product name is required.
                   </div>
                 </div>
@@ -90,23 +64,16 @@
         </div>
       </div>
       <!--footer-->
-      <div
-        class="flex items-center justify-end p-2 border-t border-solid border-slate-200 rounded-b"
-      >
+      <div class="flex items-center justify-end p-2 border-t border-solid border-slate-200 rounded-b">
         <button
           class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          (click)="toggleModal()"
-        >
+          type="button" (click)="toggleModal()">
           Close
         </button>
         <button
           class="bg-green-600 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          [ngClass]="form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
-          type="submit"
-          form="ngForm"
-          [disabled]="form.invalid"
-        >
+          [ngClass]="form.invalid ? 'cursor-not-allowed' : 'cursor-pointer'" type="submit" form="ngForm"
+          [disabled]="form.invalid">
           Save
         </button>
       </div>

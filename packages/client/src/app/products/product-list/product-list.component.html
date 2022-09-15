@@ -1,6 +1,7 @@
 <app-header></app-header>
 
-<app-product-edit [showModal]="showModal" [editMode]="false" (showModalEvent)="setModal($event)"></app-product-edit>
+<app-product-edit [showModal]="showModal" [editMode]="false" (showModalEvent)="setModal($event)"
+  [fetchProduct]="getProductList"></app-product-edit>
 
 <app-list-table [title]="title" [columns]="columns" [rows]="rows" [page]="page" [count]="count" [tableSize]="tableSize"
   [onButtonClick]="onCreateButtonClick">

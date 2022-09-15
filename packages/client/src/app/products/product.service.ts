@@ -15,7 +15,11 @@ export class ProductService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'x-access-token': localStorage.getItem('token') || ''
+      'x-access-token': localStorage.getItem('token') || '',
+      'Cache-Control':
+        'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
+      Pragma: 'no-cache',
+      Expires: '0'
     })
   }
 
@@ -47,7 +51,6 @@ export class ProductService {
           return of({ error: error })
         })
       )
-      .subscribe()
   }
 
   updateProduct(productId: string, product: Product) {
@@ -62,7 +65,6 @@ export class ProductService {
           return of({ error: error })
         })
       )
-      .subscribe()
   }
 
   deleteProduct(productId: string) {
