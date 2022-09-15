@@ -1,18 +1,12 @@
 <!-- component -->
-<div *ngIf="searchText && searchBy">
-  <app-item-edit
-    [showModal]="showModal"
-    [editMode]="false"
-    (showModalEvent)="setModal($event)"
-    [productId]="searchText"
-  ></app-item-edit>
+<div *ngIf="categoryFromURL">
+  <app-header></app-header>
 </div>
-<app-list-table
-  [title]="title"
-  [columns]="columns"
-  [rows]="rows"
-  [page]="page"
-  [count]="count"
-  [tableSize]="tableSize"
-  [onButtonClick]="onCreateButtonClick"
-></app-list-table>
+
+<div *ngIf="searchText && searchBy">
+  <app-item-edit [showModal]="showModal" [editMode]="false" (showModalEvent)="setModal($event)" [productId]="searchText"
+    [editMode]="false" [onUpdate]="onUpdate"></app-item-edit>
+</div>
+
+<app-list-table [title]="title" [columns]="columns" [rows]="rows" [page]="page" [count]="count" [tableSize]="tableSize"
+  [onButtonClick]="onCreateButtonClick"></app-list-table>

@@ -99,7 +99,7 @@ export class ItemListComponent implements OnInit {
     return rowValues
   }
 
-  ngOnInit(): void {
+  getItemList = () => {
     this.categoryFromURL = this.route.snapshot.paramMap.get('category') || ''
     this.searchTextFromURL =
       this.route.snapshot.paramMap.get('searchText') || ''
@@ -124,5 +124,14 @@ export class ItemListComponent implements OnInit {
           this.rows = { ...this.rows, content: this.getRows(response?.data) }
         })
     }
+  }
+
+  ngOnInit(): void {
+    this.getItemList()
+  }
+
+  onUpdate = () => {
+    this.showModal = !this.showModal
+    this.getItemList()
   }
 }

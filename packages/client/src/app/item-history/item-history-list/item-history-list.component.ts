@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChange,
+  SimpleChanges
+} from '@angular/core'
 import { Router } from '@angular/router'
 import {
   Alignment,
@@ -25,13 +32,14 @@ interface IItemHistoryData {
   templateUrl: './item-history-list.component.html',
   styleUrls: ['./item-history-list.component.css']
 })
-export class ItemHistoryListComponent implements OnInit {
+export class ItemHistoryListComponent implements OnInit, OnChanges {
   constructor(
     private historyService: ItemHistoryService,
     private router: Router
   ) {}
 
   @Input() itemId: string
+  @Input() fetchAgain: number
 
   page: number = 1
   count: number = 0
@@ -87,6 +95,14 @@ export class ItemHistoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.historyService
+      .getHistoryList(this.itemId)
+      .subscribe((response: any) => {
+        this.rows = { ...this.rows, content: this.getRows(response?.data) }
+      })
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
     this.historyService
       .getHistoryList(this.itemId)
       .subscribe((response: any) => {

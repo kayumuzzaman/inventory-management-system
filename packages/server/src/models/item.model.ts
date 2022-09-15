@@ -10,7 +10,6 @@ const itemSchema = new mongoose.Schema(
       max: 500
     },
     description: {
-      required: true,
       type: String,
       max: 10000
     },

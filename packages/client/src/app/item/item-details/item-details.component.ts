@@ -1,7 +1,7 @@
 /* global localStorage */
 
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute, Route, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { IRowDetails } from 'src/app/component/details-table/details-table.component'
 import { environment } from 'src/environments/environment'
 import { ItemService } from '../item.service'
@@ -22,13 +22,14 @@ export class ItemDetailsComponent implements OnInit {
   showDetailsModal: boolean = false
   showStatusModal: boolean = false
   statusEditMode: boolean = false
+  statusUpdated: number = 0
   constructor(
     private itemService: ItemService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
+  getItemDetails = () => {
     this.itemId = this.route.snapshot.paramMap.get('itemId') || ''
     if (this.itemId) {
       this.itemService
@@ -95,6 +96,10 @@ export class ItemDetailsComponent implements OnInit {
     }
   }
 
+  ngOnInit(): void {
+    this.getItemDetails()
+  }
+
   setDetailsModal(event: boolean) {
     this.showDetailsModal = event
   }
@@ -107,7 +112,7 @@ export class ItemDetailsComponent implements OnInit {
     this.showDetailsModal = !this.showDetailsModal
   }
 
-  onStatusUpdate = () => {
+  onUpdateStatusModel = () => {
     this.showStatusModal = !this.showStatusModal
   }
 
@@ -119,8 +124,12 @@ export class ItemDetailsComponent implements OnInit {
     }
   }
 
-  onUpdate = () => {
-    const currentUrl = this.router.url
-    this.router.navigateByUrl(currentUrl)
+  onUpdateDetails = () => {
+    this.getItemDetails()
+  }
+
+  onUpdateStatus = () => {
+    this.statusUpdated = this.statusUpdated + 1
+    this.getItemDetails()
   }
 }

@@ -5,7 +5,8 @@
   [onDelete]="onDelete">
 </app-details-table>
 
-<app-product-edit [showModal]="showModal" [editMode]="true" [productId]="productId" (showModalEvent)="setModal($event)">
+<app-product-edit [showModal]="showModal" [editMode]="true" [fetchProduct]="getProductDetails" [productId]="productId"
+  (showModalEvent)="setModal($event)">
 </app-product-edit>
 
 <app-item-list [searchBy]="searchBy" [searchText]="productId"></app-item-list>

@@ -68,7 +68,6 @@ export class StatusEditComponent implements OnInit {
     const receivedDate = this.form.value.receivedDate
     const returnedDate = this.form.value.returnedDate
     const description = this.form.value.description
-    const currentUrl = this.router.url
     const status: Status = {
       itemId,
       productId,
@@ -80,17 +79,21 @@ export class StatusEditComponent implements OnInit {
     }
 
     if (!this.editMode) {
-      this.statusService.createStatus(status)
+      this.statusService.createStatus(status).subscribe(() => {
+        this.onUpdate()
+        this.toggleModal()
+        this.form.reset()
+      })
     } else {
       if (this.itemId) {
-        this.statusService.updateStatus(status, itemId)
+        this.statusService.updateStatus(status, itemId).subscribe(() => {
+          this.onUpdate()
+          this.toggleModal()
+          this.form.reset()
+        })
       } else {
         throw new Error('itemId is not available')
       }
     }
-
-    this.onUpdate()
-
-    this.toggleModal()
   }
 }

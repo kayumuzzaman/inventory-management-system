@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { Product } from '../product.model'
 import { ProductService } from '../product.service'
 
@@ -14,17 +14,16 @@ export class ProductEditComponent implements OnInit {
   @Output() showModalEvent: EventEmitter<boolean> = new EventEmitter()
   @Input() editMode!: boolean
   @Input() productId!: string | null
+  @Input() fetchProduct: () => void
   form: FormGroup
 
   constructor(
     private productService: ProductService,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
+  getProductDetailsForForm = () => {
     this.productId = this.route.snapshot.paramMap.get('id')
-
     if (this.productId) {
       this.productService
         .getProductDetails(this.productId)
@@ -33,6 +32,11 @@ export class ProductEditComponent implements OnInit {
           this.form.patchValue(product)
         })
     }
+  }
+
+  ngOnInit(): void {
+    this.getProductDetailsForForm()
+
     this.form = new FormGroup({
       productName: new FormControl(null, Validators.required),
       type: new FormControl(null, Validators.required),
@@ -42,6 +46,7 @@ export class ProductEditComponent implements OnInit {
 
   toggleModal() {
     this.showModal = !this.showModal
+    this.getProductDetailsForForm()
     this.showModalEvent.emit(this.showModal)
   }
 
@@ -49,7 +54,6 @@ export class ProductEditComponent implements OnInit {
     const productName = this.form.value.productName
     const model = this.form.value.model
     const type = this.form.value.type
-    const currentUrl = this.router.url
     const product: Product = {
       productName: productName,
       model: model,
@@ -57,16 +61,20 @@ export class ProductEditComponent implements OnInit {
     }
 
     if (!this.editMode) {
-      this.productService.createProduct(product)
+      this.productService.createProduct(product).subscribe(() => {
+        this.fetchProduct()
+      })
     } else {
       if (this.productId) {
-        this.productService.updateProduct(this.productId, product)
+        this.productService
+          .updateProduct(this.productId, product)
+          .subscribe(() => this.fetchProduct())
       } else {
         throw new Error('productId is not available')
       }
     }
 
-    this.router.navigateByUrl(currentUrl)
+    this.form.reset()
 
     this.toggleModal()
   }

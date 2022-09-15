@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { Item } from '../item.model'
 import { ItemService } from '../item.service'
 
@@ -21,7 +21,6 @@ export class ItemEditComponent implements OnInit {
   form: FormGroup
   constructor(
     private itemService: ItemService,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
@@ -52,7 +51,6 @@ export class ItemEditComponent implements OnInit {
     const itemName = this.form.value.itemName
     const serialNo = this.form.value.serialNo
     const description = this.form.value.description
-    const currentUrl = this.router.url
     const item: Item = { productId, itemName, serialNo, description }
 
     if (!this.editMode) {
@@ -64,6 +62,8 @@ export class ItemEditComponent implements OnInit {
         throw new Error('itemId is not available')
       }
     }
+
+    this.form.reset()
 
     this.onUpdate()
 
